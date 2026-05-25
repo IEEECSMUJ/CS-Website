@@ -66,7 +66,7 @@ export default function TopographicBackground({
 
       // Create a responsive grid so the topographic lines are never stretched
       const maxDim = Math.max(w, h);
-      const cellSize = Math.max(32, maxDim / 60); 
+      const cellSize = Math.max(20, maxDim / 100); 
       
       const cols = Math.ceil(w / cellSize);
       const rows = Math.ceil(h / cellSize);
@@ -152,20 +152,13 @@ export default function TopographicBackground({
       }
     };
 
-    // Throttle to ~20fps (50ms interval) — this subtle background animation
-    // doesn't need 60fps but was stealing frame budget from scroll animations.
-    let lastDrawTime = 0;
-    const FRAME_INTERVAL = 50; // ms, ~20fps
-
-    const animate = (now: number) => {
-      animFrameRef.current = requestAnimationFrame(animate);
-      if (now - lastDrawTime < FRAME_INTERVAL) return;
-      lastDrawTime = now;
+    const animate = () => {
       timeRef.current += animated ? 0.04 : 0;
       drawContours(timeRef.current);
+      animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animFrameRef.current = requestAnimationFrame(animate);
+    animate();
 
     return () => {
       window.removeEventListener("resize", resize);
