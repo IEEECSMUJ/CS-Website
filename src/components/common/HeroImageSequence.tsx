@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect, useState, Suspense, useLayoutEffect, useCallback } from "react";
+import React, { useRef, useEffect, useState, Suspense, useLayoutEffect, useCallback, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment, Float } from "@react-three/drei";
 import * as THREE from "three";
@@ -12,23 +12,30 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const sharedMaterial = new THREE.MeshStandardMaterial({
-  color: new THREE.Color("#F5A623"),
-  roughness: 0.35,
-  metalness: 0.4,
-});
+// Preload the GLTF logo asset at the module level
+useGLTF.preload("/logos/ieee.glb");
 
 function Model({ url, scale = 0.35, position = [0, 0, 0] }: { url: string; scale?: number; position?: [number, number, number] }) {
   const { scene } = useGLTF(url, true);
   const modelRef = useRef<THREE.Group>(null);
-  
+
+  // Clone the cached scene to prevent sharing the same node between distinct canvas scene-graphs
+  const clonedScene = useMemo(() => scene.clone(), [scene]);
+
+  // Instantiate material locally to compile specifically for this WebGL context
+  const material = useMemo(() => new THREE.MeshStandardMaterial({
+    color: new THREE.Color("#F5A623"),
+    roughness: 0.35,
+    metalness: 0.4,
+  }), []);
+
   useLayoutEffect(() => {
-    scene.traverse((obj) => {
+    clonedScene.traverse((obj) => {
       if ((obj as THREE.Mesh).isMesh) {
-        (obj as THREE.Mesh).material = sharedMaterial;
+        (obj as THREE.Mesh).material = material;
       }
     });
-  }, [scene]);
+  }, [clonedScene, material]);
 
   useFrame((state, delta) => {
     if (modelRef.current) {
@@ -39,12 +46,12 @@ function Model({ url, scale = 0.35, position = [0, 0, 0] }: { url: string; scale
 
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-      <primitive 
+      <primitive
         ref={modelRef}
-        object={scene} 
-        scale={scale} 
-        position={position} 
-        rotation={[Math.PI / 2, 0, Math.PI / 2]} 
+        object={clonedScene}
+        scale={scale}
+        position={position}
+        rotation={[Math.PI / 2, 0, Math.PI / 2]}
       />
     </Float>
   );
@@ -53,6 +60,7 @@ function Model({ url, scale = 0.35, position = [0, 0, 0] }: { url: string; scale
 export default function HeroImageSequence({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement | null> }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+  const modelOuterContainerRef = useRef<HTMLDivElement>(null);
   const modelContainerRef = useRef<HTMLDivElement>(null);
 
   const totalFrames = 36;
@@ -69,13 +77,13 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
     width: typeof window !== "undefined" ? window.innerWidth : 0,
     height: typeof window !== "undefined" ? window.innerHeight : 0
   });
-  // Lazy-mount Three.js Canvas only when needed (saves ~40-80 MB GPU memory)
-  const [show3DModel, setShow3DModel] = useState(false);
+  // Mount Three.js Canvas immediately to compile shaders and generate PMREM reflections early
+  const show3DModel = true;
 
   // Aspect-ratio aware drawing to canvas
   const renderFrame = useCallback((index: number) => {
     if (index === lastFrameRef.current) return;
-    
+
     // Find closest loaded image if the target frame isn't loaded yet (flicker protection)
     let img = imagesRef.current[index];
     if (!img) {
@@ -94,7 +102,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
         img = imagesRef.current[closestIdx];
       }
     }
-    
+
     if (!img) return; // No frames loaded yet
 
     const canvas = canvasRef.current;
@@ -103,13 +111,13 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
     if (!ctx) return;
 
     lastFrameRef.current = index;
-    
+
     const { width, height, dpr } = dimensionsRef.current;
     if (width === 0 || height === 0) return;
-    
+
     const targetWidth = width * dpr;
     const targetHeight = height * dpr;
-    
+
     // Resize backing store only if changed to avoid layout reflows on scroll ticks
     if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
       canvas.width = targetWidth;
@@ -151,7 +159,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
       if (playheadRef.current.frame === 0) {
         renderFrame(0);
       }
-      
+
       // Load remaining frames progressively in batches to protect initial bandwidth
       const loadBatch = (start: number, end: number) => {
         for (let i = start; i <= end; i++) {
@@ -200,13 +208,13 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
       const w = window.innerWidth;
       const h = window.innerHeight;
       const rawDpr = window.devicePixelRatio || 1;
-      
+
       // Capped DPR on mobile (up to 1.25x) to save memory/prevent thermal throttling; cap at 2.0 on desktop
       const dpr = w < 768 ? Math.min(1.25, rawDpr) : Math.min(2.0, rawDpr);
-      
+
       dimensionsRef.current = { width: w, height: h, dpr };
       windowSizeRef.current = { width: w, height: h };
-      
+
       // Force redraw on resize
       lastFrameRef.current = -1;
       renderFrame(Math.round(playheadRef.current.frame));
@@ -274,28 +282,44 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
       visibility: "visible",
       ease: "none",
       duration: 0.04,
-      onStart: () => setShow3DModel(true), // Lazy-mount Three.js Canvas
     }, 0.94);
 
-    // Secondary ScrollTrigger for offscreen GPU rendering cleanup
+    // Secondary ScrollTrigger for offscreen GPU rendering cleanup (acts on outer container)
     ScrollTrigger.create({
       trigger: "#hero-scroll-track",
       start: "top top",
       end: "bottom top", // fires when the bottom of the 200vh track leaves the top of the viewport
       onLeave: () => {
-        if (modelContainerRef.current) {
-          modelContainerRef.current.style.visibility = "hidden";
+        if (modelOuterContainerRef.current) {
+          modelOuterContainerRef.current.style.visibility = "hidden";
         }
         if (canvasContainerRef.current) {
           canvasContainerRef.current.style.display = "none";
         }
       },
       onEnterBack: () => {
+        if (modelOuterContainerRef.current) {
+          modelOuterContainerRef.current.style.visibility = "visible";
+        }
         if (canvasContainerRef.current) {
           canvasContainerRef.current.style.display = "flex";
         }
         // Force update timeline triggers to sync correctly
         tl.scrollTrigger?.update();
+      },
+      onEnter: () => {
+        if (modelOuterContainerRef.current) {
+          modelOuterContainerRef.current.style.visibility = "visible";
+        }
+        if (canvasContainerRef.current) {
+          canvasContainerRef.current.style.display = "flex";
+        }
+        tl.scrollTrigger?.update();
+      },
+      onLeaveBack: () => {
+        if (modelOuterContainerRef.current) {
+          modelOuterContainerRef.current.style.visibility = "hidden";
+        }
       }
     });
 
@@ -304,7 +328,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
   return (
     <div className="w-full h-dvh relative overflow-hidden flex items-center justify-center bg-transparent">
       {/* 2D Image Sequence Canvas */}
-      <div 
+      <div
         ref={canvasContainerRef}
         className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
         style={{
@@ -318,35 +342,43 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
         />
       </div>
 
-      {/* 3D Model Canvas — lazy-mounted to save GPU memory */}
-      <div 
-        ref={modelContainerRef}
+      {/* 3D Model Canvas — mounted immediately to ensure early GPU compilation */}
+      <div
+        ref={modelOuterContainerRef}
         className="absolute inset-0 z-20 pointer-events-none"
         style={{
-          visibility: "hidden",
-          opacity: 0,
-          willChange: "opacity",
+          visibility: "visible",
         }}
       >
-        {show3DModel && (
-          <Canvas
-            camera={{ position: [0, 0, 5], fov: 45 }}
-            gl={{ alpha: true, antialias: true }}
-            style={{ background: "transparent", pointerEvents: "none" }}
-          >
-            <ambientLight intensity={1} />
-            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-            <pointLight position={[-10, -10, -10]} intensity={0.5} />
-            <Suspense fallback={null}>
-              <Model 
-                url="/logos/ieee.glb" 
-                scale={windowSizeRef.current.width < 768 ? 0.22 : 0.35} 
-                position={[0, 0, 0]} 
-              />
-              <Environment files="/potsdamer_platz_1k.hdr" />
-            </Suspense>
-          </Canvas>
-        )}
+        <div
+          ref={modelContainerRef}
+          className="w-full h-full pointer-events-none"
+          style={{
+            visibility: "hidden",
+            opacity: 0,
+            willChange: "opacity",
+          }}
+        >
+          {show3DModel && (
+            <Canvas
+              camera={{ position: [0, 0, 5], fov: 45 }}
+              gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+              style={{ background: "transparent", pointerEvents: "none" }}
+            >
+              <ambientLight intensity={1} />
+              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
+              <pointLight position={[-10, -10, -10]} intensity={0.5} />
+              <Suspense fallback={null}>
+                <Model
+                  url="/logos/ieee.glb"
+                  scale={windowSizeRef.current.width < 768 ? 0.22 : 0.35}
+                  position={[0, 0, 0]}
+                />
+                <Environment files="/potsdamer_platz_1k.hdr" />
+              </Suspense>
+            </Canvas>
+          )}
+        </div>
       </div>
     </div>
   );

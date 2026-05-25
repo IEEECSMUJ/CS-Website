@@ -1,19 +1,26 @@
 "use client";
 
-import { Suspense, useRef, useEffect } from "react";
+import { Suspense, useRef, useEffect, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
-const sharedMaterial = new THREE.MeshStandardMaterial({
-  color: new THREE.Color("#F5A623"),
-  roughness: 0.35,
-  metalness: 0.4,
-});
+// Preload the GLTF logo asset at the module level to ensure instant rendering
+useGLTF.preload("/logos/ieee.glb");
 
 function Model() {
-  const gltf = useGLTF("/logos/ieee.glb", true);
+  const { scene } = useGLTF("/logos/ieee.glb", true);
   const ref = useRef<THREE.Group>(null);
+
+  // Clone the cached scene to prevent sharing the same node between distinct canvas scene-graphs
+  const clonedScene = useMemo(() => scene.clone(), [scene]);
+
+  // Instantiate material locally to compile specifically for this WebGL context
+  const material = useMemo(() => new THREE.MeshStandardMaterial({
+    color: new THREE.Color("#F5A623"),
+    roughness: 0.35,
+    metalness: 0.4,
+  }), []);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -22,17 +29,17 @@ function Model() {
 
     ref.current.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
-        (child as THREE.Mesh).material = sharedMaterial;
+        (child as THREE.Mesh).material = material;
       }
     });
-  }, []);
- 
+  }, [clonedScene, material]);
+
   useFrame((_, delta) => {
     if (!ref.current) return;
     ref.current.rotation.z += delta * 0.5;
   });
 
-  return <primitive ref={ref} object={gltf.scene} scale={0.6} />;
+  return <primitive ref={ref} object={clonedScene} scale={0.6} />;
 }
 
 export default function Logo3D() {
