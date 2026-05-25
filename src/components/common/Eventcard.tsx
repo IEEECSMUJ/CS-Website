@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { eventsData, type EventItem } from "@/data/eventsData";
 
 function TornEdge() {
@@ -23,10 +24,12 @@ function EventCard({ exhibition }: EventCardProps) {
     <article className="relative bg-[#121212] overflow-hidden w-full max-w-xs flex flex-col rounded-[3px] min-h-[calc(100%+3px)]">
       {/* Image */}
       <div className="relative h-56 overflow-hidden">
-        <img
+        <Image
           src={exhibition.image}
           alt={exhibition.title}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100vw, 30vw"
+          className="object-cover"
         />
         {/* Tag */}
         <span 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   Linkedin,
   Instagram,
@@ -130,11 +131,13 @@ export default function Footer() {
                 className={revealClass()}
                 style={{ ...colStyle, ...revealStyle('0s') }}
               >
-                <div style={{ marginBottom: '1.25rem', width: '9rem' }}>
-                  <img
+                <div style={{ marginBottom: '1.25rem', width: '9rem', height: '3rem', position: 'relative' }}>
+                  <Image
                     src="/logos/ieee-cs-logo.avif"
                     alt="IEEE CS Logo"
-                    style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                    fill
+                    sizes="9rem"
+                    className="object-contain"
                   />
                 </div>
                 <p style={{ color: '#9ca3af', fontSize: '0.875rem', lineHeight: '1.65', marginBottom: '1.75rem' }}>

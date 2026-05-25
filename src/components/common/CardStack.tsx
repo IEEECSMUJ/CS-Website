@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import styles from "@/components/common/CardStack.module.css";
 
 const images = [
@@ -60,18 +61,14 @@ export default function CardStack() {
         <div className={`${styles.cards} ${open ? styles.open : ""}`}>
           {images.map((src, index) => (
             <div key={index} className={styles.card}>
-              <img
+              <Image
                 src={src}
-                alt={`card-${index}`}
+                alt={`IEEE CS MUJ Event Showcase ${index + 1}`}
                 draggable="false"
-                loading="eager"
-                decoding="async"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                }}
+                sizes="(max-width: 768px) 40vw, 30vw"
+                fill
+                priority={index === 3} // Center/front card of the stack has priority
+                className="object-cover"
               />
             </div>
           ))}

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, ComponentProps } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 
 interface DecryptedTextProps extends ComponentProps<typeof motion.span> {
   text: string;

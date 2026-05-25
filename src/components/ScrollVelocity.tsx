@@ -7,7 +7,7 @@ import {
   useMotionValue,
   useVelocity,
   useAnimationFrame
-} from 'motion/react';
+} from 'framer-motion';
 
 interface VelocityMapping {
   input: [number, number];

@@ -43,9 +43,21 @@ function AccordionItem({
   isOpen: boolean;
   onClick: () => void;
 }) {
+  const itemId = faq.question.replace(/\s+/g, '-').replace(/[?]/g, '').toLowerCase();
+
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      aria-expanded={isOpen}
+      aria-controls={`faq-answer-${itemId}`}
       style={{
         cursor: "pointer",
         borderRadius: 18,
@@ -69,6 +81,7 @@ function AccordionItem({
         }}
       >
         <span
+          id={`faq-question-${itemId}`}
           style={{
             fontSize: 15,
             fontWeight: isOpen ? 600 : 500,
@@ -111,6 +124,9 @@ function AccordionItem({
 
       {/* Answer */}
       <div
+        id={`faq-answer-${itemId}`}
+        role="region"
+        aria-labelledby={`faq-question-${itemId}`}
         style={{
           display: "grid",
           gridTemplateRows: isOpen ? "1fr" : "0fr",
@@ -153,7 +169,6 @@ export default function FAQ() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=DM+Sans:wght@400;500;600&display=swap');
-        * { box-sizing: border-box; }
 
         .faq-section {
           background: transparent;
@@ -162,7 +177,7 @@ export default function FAQ() {
           justify-content: center;
           padding: 96px 80px;
           min-height: 100vh;
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'DM Sans', var(--font-dm-sans), sans-serif;
         }
 
         .faq-inner {
@@ -181,7 +196,7 @@ export default function FAQ() {
         }
 
         .faq-heading {
-          font-family: 'Playfair Display', serif;
+          font-family: 'Playfair Display', var(--font-playfair), serif;
           font-size: 84px;
           font-weight: 900;
           line-height: 0.9;

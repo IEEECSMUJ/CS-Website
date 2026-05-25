@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import React, { useRef } from "react";
 const TeamCard = dynamic(() => import('@/app/team/TeamCard'), { ssr: false });
 import DecryptedText from "@/components/DecryptedText";
@@ -60,7 +61,15 @@ const Skiper19 = () => {
       </div>
 
       <ScrollControlled direction="left" className="rounded-4xl font-jakarta-sans w-[50vw] -translate-x-[15vw] translate-y-[100vh] ">
-        <img src="/logos/ieee-cs-logo.avif" alt="IEEE Logo" />
+        <div className="relative w-full h-[250px]">
+          <Image
+            src="/logos/ieee-cs-logo.avif"
+            alt="IEEE CS Logo"
+            fill
+            sizes="50vw"
+            className="object-contain"
+          />
+        </div>
       </ScrollControlled>
 
       <ScrollControlled direction="right" className="rounded-4xl font-jakarta-sans w-[50vw] translate-x-[15vw] translate-y-[118vh] ">

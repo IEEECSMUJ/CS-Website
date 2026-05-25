@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect, memo } from 'react';
+import Image from 'next/image';
 import {
     useScroll,
     useTransform,
@@ -8,7 +9,6 @@ import {
     MotionValue,
     AnimatePresence,
 } from 'framer-motion';
-import { useMediaQuery } from 'react-responsive';
 
 const IMAGES = [
     'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
@@ -36,6 +36,19 @@ interface CellProps {
     onClick: () => void;
     cols: number;
     heroIndex: number;
+}
+
+// Custom hook to replace react-responsive
+function useIsMobile(maxWidth = 767) {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const media = window.matchMedia(`(max-width: ${maxWidth}px)`);
+        setIsMobile(media.matches);
+        const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+        media.addEventListener('change', listener);
+        return () => media.removeEventListener('change', listener);
+    }, [maxWidth]);
+    return isMobile;
 }
 
 // Memoised — only re-renders when its own props change, not on every scroll tick
@@ -94,13 +107,13 @@ const GridCell = memo(function GridCell({
                 animate={{ filter: dimFilter, opacity: dimOpacity }}
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
             >
-                <img
+                <Image
                     src={IMAGES[index]}
-                    alt=""
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    decoding="async"
-                    style={{ transform: 'translateZ(0)', display: 'block' }}
+                    alt={`IEEE CS MUJ Highlight Hero ${index}`}
+                    fill
+                    sizes="(max-width: 768px) 33vw, 20vw"
+                    priority
+                    className="object-cover"
                 />
             </motion.div>
         );
@@ -124,13 +137,12 @@ const GridCell = memo(function GridCell({
             }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
-            <img
+            <Image
                 src={IMAGES[index]}
-                alt=""
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-                style={{ transform: 'translateZ(0)', display: 'block' }}
+                alt={`IEEE CS MUJ Highlight ${index}`}
+                fill
+                sizes="(max-width: 768px) 33vw, 20vw"
+                className="object-cover"
             />
         </motion.div>
     );
@@ -141,8 +153,8 @@ export default function ScrollGrid() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [gridComplete, setGridComplete] = useState(false);
     
-    // Check if on mobile view
-    const isMobile = useMediaQuery({ maxWidth: 767 });
+    // Check if on mobile view using custom matchMedia hook
+    const isMobile = useIsMobile(767);
     
     const cols = isMobile ? 3 : 5;
     const heroIndex = isMobile ? 4 : 7;
@@ -212,11 +224,12 @@ export default function ScrollGrid() {
                             transition={{ type: 'spring', stiffness: 260, damping: 28 }}
                             onClick={() => setActiveIndex(null)}
                         >
-                            <img
+                            <Image
                                 src={IMAGES[activeIndex]}
-                                alt=""
-                                className="w-full h-full object-cover"
-                                style={{ display: 'block' }}
+                                alt="IEEE CS MUJ Zoomed Highlight"
+                                fill
+                                sizes="min(80vw, 560px)"
+                                className="object-cover"
                             />
                         </motion.div>
                     )}
