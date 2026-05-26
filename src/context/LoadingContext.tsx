@@ -14,7 +14,12 @@ interface LoadingContextType {
 const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
-  const [isVideoFinished, setVideoFinished] = useState(false);
+  const [isVideoFinished, setVideoFinished] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("preloaderShown") === "true";
+    }
+    return false;
+  });
   const { progress, active } = useProgress();
   const [isAssetsLoaded, setAssetsLoaded] = useState(false);
 
