@@ -12,6 +12,7 @@ const ProjectCard = dynamic(() => import("@/components/common/ProjectCard"), { s
 const LandingText = dynamic(() => import("@/components/common/LandingText"), { ssr: false });
 const HeroImageSequence = dynamic(() => import("@/components/common/HeroImageSequence"), { ssr: false });
 import SmoothScrollProvider from "@/components/common/SmoothScrollProvider";
+import { useLoading } from "@/context/LoadingContext";
 const NewComponent = dynamic(() => import("@/components/common/newComponent"),{ ssr: false });
 import LineBackground from "@/components/LineBackground";
 import Newsletter from "@/components/Newsletter";
@@ -32,25 +33,40 @@ const WORD_DURATION = 450;
 const TOTAL_INTRO = HELLO_LANGUAGES.length * WORD_DURATION + 1000;
 
 export default function Home() {
+  const { isReady } = useLoading();
+  const [startIntro, setStartIntro] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const heroPinRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    if (!isReady) return;
 
+    // Delay starting the intro text sequence until the preloader's 1-second exit animation is complete
+    const delayTimer = setTimeout(() => {
+      setStartIntro(true);
+    }, 1000);
+
+    return () => clearTimeout(delayTimer);
+  }, [isReady]);
 
   useEffect(() => {
+    if (!startIntro) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((i) =>
         i >= HELLO_LANGUAGES.length - 1 ? i : i + 1
       );
     }, WORD_DURATION);
     return () => clearInterval(interval);
-  }, []);
+  }, [startIntro]);
 
   useEffect(() => {
+    if (!startIntro) return;
+
     const timer = setTimeout(() => setShowIntro(false), TOTAL_INTRO);
     return () => clearTimeout(timer);
-  }, []);
+  }, [startIntro]);
 
   return (
     
