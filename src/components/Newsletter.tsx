@@ -8,7 +8,6 @@ interface NewsletterEdition {
   image: string;
   link: string;
   rotation: number;
-  shift: number;
 }
 
 const Card = () => {
@@ -18,21 +17,18 @@ const Card = () => {
       image: "/images/[7]%20December.avif",
       link: "https://example.com/[7]December.png",
       rotation: -15,
-      shift: 1,
     },
     {
       title: "January Edition",
       image: "/images/[8]%20January.avif",
       link: "https://example.com/january",
       rotation: 5,
-      shift: 0,
     },
     {
       title: "February Edition",
       image: "/images/[9]%20February.avif",
       link: "https://example.com/february",
       rotation: 25,
-      shift: -1,
     },
   ];
 
@@ -86,10 +82,7 @@ const Card = () => {
             >
               <div
                 data-text={edition.title}
-                style={{ 
-                  ["--r" as any]: edition.rotation,
-                  ["--x" as any]: edition.shift 
-                }}
+                style={{ ["--r" as any]: edition.rotation }}
                 className="glass"
               >
                 <img
@@ -133,15 +126,18 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: 0.5s;
     border-radius: 10px;
-    margin: 0 14px;
-    transform: translateX(calc(var(--x) * 94px)) rotate(calc(var(--r) * 1deg));
+    margin: 0 -80px;
+    /* Removed backdrop-filter: blur(10px) — forces per-frame recompositing
+       of all layers behind this element during scroll, causing jitter. */
+    transform: rotate(calc(var(--r) * 1deg));
     overflow: hidden;
   }
 
   .container:hover .glass {
-    transform: translateX(0px) rotate(0deg);
+    transform: rotate(0deg);
+    margin: 0 14px;
   }
 
   .glass-image {
@@ -175,8 +171,7 @@ const StyledWrapper = styled.div`
     .container .glass {
       width: 220px;
       height: 320px;
-      margin: 0 14px;
-      transform: translateX(calc(var(--x) * 74px)) rotate(calc(var(--r) * 1deg));
+      margin: 0 -60px;
     }
   }
 
@@ -185,8 +180,7 @@ const StyledWrapper = styled.div`
   .container .glass {
     width: 180px;
     height: 260px;
-    margin: 0 14px;
-    transform: translateX(calc(var(--x) * 60px)) rotate(calc(var(--r) * 1deg));
+    margin: 0 -45px;
   }
 }
 
@@ -195,8 +189,7 @@ const StyledWrapper = styled.div`
   .container .glass {
     width: 140px;
     height: 210px;
-    margin: 0 14px;
-    transform: translateX(calc(var(--x) * 47px)) rotate(calc(var(--r) * 1deg));
+    margin: 0 -35px;
   }
 }
 `;
