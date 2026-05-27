@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,17 +12,17 @@ export default function HorizontalGallery() {
   const scroller = useRef<HTMLDivElement | null>(null);
   const wrapper = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!scroller.current || !wrapper.current) return;
-    const wrapperEl = wrapper.current;
 
-    ScrollTrigger.normalizeScroll(true);
+    // Scoped query for sections to prevent transition conflicts
+    const sections = gsap.utils.toArray<HTMLElement>('.skill-set', wrapper.current);
+    if (sections.length === 0) return;
 
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      const sections = gsap.utils.toArray<HTMLElement>('.skill-set');
-
+      // 1. Pinned Horizontal Track ScrollTrigger
       const st = ScrollTrigger.create({
         trigger: scroller.current,
         pin: true,
@@ -35,7 +36,8 @@ export default function HorizontalGallery() {
         }),
       });
 
-      const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div');
+      // 2. Section 1 Items Fade/Slide-in
+      const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div', wrapper.current);
       gsap.set(section1Items, { y: 120, x: 60, opacity: 0 });
 
       ScrollTrigger.create({
@@ -54,14 +56,15 @@ export default function HorizontalGallery() {
         },
       });
 
-      const section2Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(2) > div');
+      // 3. Section 2 Items Scrub Transition (Perfectly synced with pin)
+      const section2Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(2) > div', wrapper.current);
       gsap.set(section2Items, { y: 120, x: 60, opacity: 0 });
 
       ScrollTrigger.create({
         trigger: scroller.current,
         scrub: 0.8,
         start: 'top top',
-        end: () => '+=' + scroller.current!.offsetWidth,
+        end: () => '+=' + (sections.length - 1) * window.innerWidth, // Synced to prevent drift or layer splits
         animation: gsap.to(section2Items, {
           y: 0,
           x: 0,
@@ -74,7 +77,7 @@ export default function HorizontalGallery() {
 
     // Mobile specific animations if any
     mm.add("(max-width: 767px)", () => {
-      const items = gsap.utils.toArray<HTMLElement>('.skill-set > div');
+      const items = gsap.utils.toArray<HTMLElement>('.skill-set > div', wrapper.current);
 
       items.forEach((item) => {
         gsap.fromTo(item, 
@@ -93,10 +96,17 @@ export default function HorizontalGallery() {
       });
     });
 
+    // Safe delayed refresh to allow images/fonts/Next.js hydration layout to stabilize
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
     return () => {
+      clearTimeout(timer);
       mm.revert();
     };
-  }, []);
+  }, { scope: wrapper });
+
 
   return (
     <div
