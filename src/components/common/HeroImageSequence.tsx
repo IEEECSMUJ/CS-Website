@@ -45,6 +45,8 @@ function Model({ url, scale = 0.35, position = [0, 0, 0] }: { url: string; scale
   );
 }
 
+useGLTF.preload("/logos/ieee.glb");
+
 export default function HeroImageSequence({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement | null> }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
@@ -67,7 +69,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
   // This completely eliminates WebGL/2D canvas composite layers from the browser's active painting tree when out of view,
   // entirely preventing the fullscreen white/gray overlay GPU rendering bug and saving huge performance resources.
   const sequenceDisplay = useTransform(scrollYProgress, (v) => (v >= 0.98 ? "none" : "flex"));
-  const modelDisplay = useTransform(scrollYProgress, (v) => (v >= 0.94 && v < 1.02 ? "block" : "none"));
+  const modelDisplay = useTransform(scrollYProgress, (v) => (v >= 0.1 && v < 2 ? "block" : "none")); //display of logo
 
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
