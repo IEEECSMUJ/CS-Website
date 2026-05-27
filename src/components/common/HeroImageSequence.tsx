@@ -1,11 +1,17 @@
 "use client";
 
 import React, { useRef, useEffect, useState, Suspense, useLayoutEffect, useCallback } from "react";
-import { useScroll, useTransform, motion, useMotionValueEvent } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment, Float } from "@react-three/drei";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import * as THREE from "three";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const sharedMaterial = new THREE.MeshStandardMaterial({
   color: new THREE.Color("#F5A623"),
@@ -49,27 +55,13 @@ useGLTF.preload("/logos/ieee.glb");
 
 export default function HeroImageSequence({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement | null> }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const sequenceRef = useRef<HTMLDivElement>(null);
+  const modelRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   
   // Cache dimensions in a ref to avoid reading window.innerWidth/innerHeight on every scroll frame
   // (reading those properties forces a layout/reflow)
   const dimensionsRef = useRef({ width: 0, height: 0, dpr: 1 });
-  
-  const { scrollYProgress } = useScroll({
-    target: scrollContainerRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Cross-fade logic: 2D sequence fades out as 3D model fades in at the very end
-  const sequenceOpacity = useTransform(scrollYProgress, [0, 0.94, 0.98], [1, 1, 0]);
-  const modelOpacity = useTransform(scrollYProgress, [0.94, 0.98, 1], [0, 1, 1]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1]);
-
-  // Dynamically control display styles to unmount/hide rendering containers when outside their active scroll range.
-  // This completely eliminates WebGL/2D canvas composite layers from the browser's active painting tree when out of view,
-  // entirely preventing the fullscreen white/gray overlay GPU rendering bug and saving huge performance resources.
-  const sequenceDisplay = useTransform(scrollYProgress, (v) => (v >= 0.98 ? "none" : "flex"));
-  const modelDisplay = useTransform(scrollYProgress, (v) => (v >= 0.1 && v < 2 ? "block" : "none")); //display of logo
 
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
@@ -156,34 +148,77 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   }, [images]);
 
-  useEffect(() => {
-    if (images.length === totalFrames) {
-        const currentProgress = scrollYProgress.get();
-        const frameIndex = Math.min(
-            totalFrames - 1,
-            Math.floor(currentProgress * totalFrames)
-        );
-        renderFrame(frameIndex);
-    }
-  }, [images, renderFrame]);
+  useGSAP(() => {
+    if (!scrollContainerRef?.current || !sequenceRef.current || !modelRef.current) return;
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (images.length === totalFrames && latest < 0.98) {
-        const frameIndex = Math.min(
-            totalFrames - 1,
-            Math.floor(latest * totalFrames)
-        );
-        renderFrame(frameIndex);
+    // Initial setup
+    gsap.set(sequenceRef.current, { opacity: 1, display: "flex" });
+    gsap.set(modelRef.current, { opacity: 0, display: "none" });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        id: "hero-sequence-trigger",
+        trigger: scrollContainerRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+          const latest = self.progress;
+          if (images.length === totalFrames && latest < 0.98) {
+            const frameIndex = Math.min(
+              totalFrames - 1,
+              Math.floor(latest * totalFrames)
+            );
+            renderFrame(frameIndex);
+          }
+        }
+      }
+    });
+
+    // Sequence Opacity/Display
+    tl.to(sequenceRef.current, {
+      opacity: 1,
+      duration: 0.94,
+      ease: "none",
+    }, 0);
+
+    tl.to(sequenceRef.current, {
+      opacity: 0,
+      duration: 0.04,
+      ease: "none",
+    }, 0.94);
+
+    tl.set(sequenceRef.current, { display: "none" }, 0.98);
+
+    // Model Opacity/Display
+    tl.set(modelRef.current, { display: "block" }, 0.1);
+    tl.to(modelRef.current, {
+      opacity: 1,
+      duration: 0.04,
+      ease: "none",
+    }, 0.94);
+
+    // Ensure the initial render frame is called once the timeline/scrolltrigger is built
+    const trigger = ScrollTrigger.getById("hero-sequence-trigger");
+    if (trigger && images.length === totalFrames) {
+      const frameIndex = Math.min(
+        totalFrames - 1,
+        Math.floor(trigger.progress * totalFrames)
+      );
+      renderFrame(frameIndex);
     }
-  });
+
+  }, { dependencies: [scrollContainerRef, images], scope: sequenceRef });
 
   useEffect(() => {
     if (images.length === totalFrames && windowSize.width > 0) {
         // Reset lastFrameRef to force a redraw after resize
         lastFrameRef.current = -1;
+        const trigger = ScrollTrigger.getById("hero-sequence-trigger");
+        const currentProgress = trigger ? trigger.progress : 0;
         const currentFrame = Math.min(
             totalFrames - 1,
-            Math.floor(scrollYProgress.get() * totalFrames)
+            Math.floor(currentProgress * totalFrames)
         );
         renderFrame(currentFrame);
     }
@@ -192,19 +227,19 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
   return (
     <div className="w-full h-screen relative overflow-hidden flex items-center justify-center bg-transparent">
       {/* 2D Image Sequence Canvas */}
-      <motion.div 
-        style={{ scale, opacity: sequenceOpacity, display: sequenceDisplay }}
+      <div 
+        ref={sequenceRef}
         className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
       >
         <canvas
           ref={canvasRef}
           className="w-full h-full block"
         />
-      </motion.div>
+      </div>
 
       {/* 3D Model Canvas */}
-      <motion.div 
-        style={{ opacity: modelOpacity, display: modelDisplay }}
+      <div 
+        ref={modelRef}
         className="absolute inset-0 z-20 pointer-events-none"
       >
         <Canvas
@@ -224,7 +259,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
             <Environment files="/potsdamer_platz_1k.hdr" />
           </Suspense>
         </Canvas>
-      </motion.div>
+      </div>
     </div>
   );
 }
