@@ -79,8 +79,6 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       document.documentElement.style.transform = ''
       
       // Force scroll position to top
-      window.scrollY = 0
-      window.pageYOffset = 0
       document.documentElement.scrollTop = 0
       document.body.scrollTop = 0
 
