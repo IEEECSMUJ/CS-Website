@@ -124,6 +124,16 @@ export default function Navbar() {
     { name: "Gallery", href: "/gallery" },
   ];
 
+  const isNavItemActive = (href: string) => {
+    // External links should never be treated as route-active.
+    if (!href.startsWith("/")) return false;
+
+    // Keep Home active only on the exact root path.
+    if (href === "/") return pathname === "/";
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
   return (
     <>
 
@@ -196,25 +206,28 @@ export default function Navbar() {
 
               <div className={style.linksSection}>
                 <nav className={style.navLinks}>
-                  {navItems.map((item, idx) => (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
-                      className={style.linkWrapper}
-                    >
-                      <Link
-                        href={item.href}
-                        className={`${style.navLink} ${pathname === item.href ? style.activeLink : ""
-                          }`}
-                        onClick={() => setMenuOpen(false)}
+                  {navItems.map((item, idx) => {
+                    const isActive = isNavItemActive(item.href);
+
+                    return (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
+                        className={style.linkWrapper}
                       >
-                        <NorrisText text={item.name} cascadeIndex={idx} />
-                        {pathname === item.href && <ScribbleIcon />}
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link
+                          href={item.href}
+                          className={`${style.navLink} ${isActive ? style.activeLink : ""}`}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <NorrisText text={item.name} cascadeIndex={idx} />
+                          {isActive && <ScribbleIcon />}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </nav>
               </div>
             </div>
