@@ -135,12 +135,15 @@ function StatCell({
   value,
   ticks,
   delay,
+  index,
 }: {
   label: string;
   value: number;
   ticks: number;
   delay: number;
+  index: number;
 }) {
+  const isRight = index % 2 !== 0;
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
   const tickRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -181,18 +184,20 @@ function StatCell({
   }, [delay, ticks, isInView]);
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden border-b border-white/[0.06] border-r p-6 md:p-10 group transition-colors duration-300 hover:bg-white/[0.02] [&:nth-child(2)]:border-r-0 [&:nth-child(4)]:border-r-0 md:[&:nth-child(2)]:border-r-0 md:[&:nth-child(4)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 md:[&:nth-child(3)]:border-b-0 md:[&:nth-child(4)]:border-b-0">
-      
+    <div ref={containerRef} className={`relative border-b border-white/[0.06] border-r p-2 md:p-10 group transition-colors duration-300 hover:bg-white/[0.02] [&:nth-child(2)]:border-r-0 [&:nth-child(4)]:border-r-0 md:[&:nth-child(2)]:border-r-0 md:[&:nth-child(4)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 md:[&:nth-child(3)]:border-b-0 md:[&:nth-child(4)]:border-b-0 flex flex-col ${isRight ? 'items-end text-right pr-4 md:items-start md:text-left md:pr-10' : 'items-start text-left pl-4 md:pl-10'}`}>
+
       <div
         ref={revealRef}
         className="absolute inset-0 bg-white/[0.03] origin-left z-10 pointer-events-none"
         style={{ transition: "transform 1s cubic-bezier(0.16, 1, 0.3, 1)" }}
       />
-      <div
-        className="absolute bottom-[-16px] right-[-8px] font-black text-white/[0.025] group-hover:text-white/[0.05] transition-colors duration-300 select-none pointer-events-none leading-none tracking-[-8px] z-0"
-        style={{ fontSize: "clamp(100px, 22vw, 200px)" }}
-      >
-        {value}
+      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <div
+          className="absolute bottom-[-16px] right-[-8px] font-black text-white/[0.025] group-hover:text-white/[0.05] transition-colors duration-300 select-none leading-none tracking-[-8px]"
+          style={{ fontSize: "clamp(100px, 22vw, 200px)" }}
+        >
+          {value}
+        </div>
       </div>
       <p
         className="relative z-[1] uppercase tracking-[4px] font-light text-white/35 mb-3"
@@ -222,7 +227,7 @@ function StatCell({
         </span>
       </div>
 
-      <div className="relative z-[1] flex flex-wrap gap-1.5 mt-5">
+      <div className={`relative z-[1] flex flex-wrap gap-1.5 mt-5 ${isRight ? 'justify-end md:justify-start' : 'justify-start'}`}>
         {Array.from({ length: ticks }).map((_, i) => (
           <div
             key={i}
@@ -256,13 +261,14 @@ export default function TeamsInfoComponent() {
       <div className="relative w-full lg:w-[50vw] px-4 lg:px-0">
         <ParticleCanvas />
         <div className="relative z-[1] w-full grid grid-cols-2 grid-rows-2">
-          {STATS.map(({ label, value, ticks, delay }) => (
+          {STATS.map(({ label, value, ticks, delay }, index) => (
             <StatCell
               key={label}
               label={label}
               value={value}
               ticks={ticks}
               delay={delay}
+              index={index}
             />
           ))}
         </div>

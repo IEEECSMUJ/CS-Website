@@ -54,7 +54,7 @@ export default function NewComponent() {
           forever.
         </p>
 
-        <button className="text-[#000000] text-lg border-4 border-[#f9a71f] bg-[#f9a71f] w-fit mx-auto lg:mx-0 px-6 py-2">
+        <button className="text-[#000000] text-lg border-4 border-[#f9a71f] bg-[#f9a71f] w-fit self-center lg:self-start px-6 py-2">
           Visit the Store
         </button>
       </div>
