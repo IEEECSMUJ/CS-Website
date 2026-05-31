@@ -2,10 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import React from "react";
-import TiltedPhotoGrid from "@/components/common/TiltedPhotoGrid";
-import Eventcard from "@/components/common/Eventcard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import dynamic from "next/dynamic";
+
+const TiltedPhotoGrid = dynamic(() => import("@/components/common/TiltedPhotoGrid"), { ssr: false });
+const Eventcard = dynamic(() => import("@/components/common/Eventcard"), { ssr: false });
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -14,19 +14,19 @@ const Card = () => {
   const editions: NewsletterEdition[] = [
     {
       title: "December Edition",
-      image: "/images/[7]%20December.avif",
+      image: "/images/december.avif",
       link: "https://example.com/[7]December.png",
       rotation: -15,
     },
     {
       title: "January Edition",
-      image: "/images/[8]%20January.avif",
+      image: "/images/january.avif",
       link: "https://example.com/january",
       rotation: 5,
     },
     {
       title: "February Edition",
-      image: "/images/[9]%20February.avif",
+      image: "/images/february.avif",
       link: "https://example.com/february",
       rotation: 25,
     },

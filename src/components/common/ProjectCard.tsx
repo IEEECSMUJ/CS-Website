@@ -301,8 +301,6 @@ const CascadingCards = () => {
     <div
       style={{
         backgroundColor: 'transparent',
-        maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
       }}
     >
       {isMobile
