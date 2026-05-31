@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
+import SmoothScrollProvider from "@/components/common/SmoothScrollProvider";
 import styles from "./calendar.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -61,7 +62,8 @@ export default function RollingSections() {
     SAMPLE_EVENTS.filter((e) => e.month === monthIndex);
 
   return (
-    <div>
+    <SmoothScrollProvider>
+      <div>
       
       <section
         ref={landingRef}
@@ -185,6 +187,7 @@ export default function RollingSections() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </SmoothScrollProvider>
   );
 }
