@@ -27,7 +27,7 @@ function EventCard({ exhibition }: EventCardProps) {
         className="absolute top-0 right-0 bg-[#9AC53F] text-black text-[11px] rounded-bl-[7px] font-semibold tracking-widest uppercase">
           {exhibition.tag}
         </span>
-      </div>
+      </div>  
 
       {/* Content */}
       <div 
@@ -149,12 +149,12 @@ export default function PastExhibitions() {
   return (
     <section className="relative bg-black min-h-screen font-sans overflow-visible">
 
-      <div className="relative z-10 m-16 md:m-24 max-w-7xl justify-items-center mx-auto px-8 pt-8 pb-32 flex flex-col items-center gap-[40px]">
+      <div className="relative z-10 mt-0 mx-4 mb-16 md:m-24 max-w-7xl justify-items-center px-8 pt-0 md:pt-8 pb-32 flex flex-col items-center gap-12 md:gap-15">
         {/* Header */}
 
         <h1
           ref={titleRef}
-          className="relative text-6xl md:text-8xl lg:text-9xl font-extrabold leading-tight tracking-tight text-center w-full mb-8 eventsTitle"
+          className="relative text-6xl md:text-8xl lg:text-9xl font-extrabold leading-tight tracking-tight text-center w-full mb-4 md:mb-8 eventsTitle"
           style={{ color: "white", textShadow: "0 0 30px rgba(244,161,25,0.2)" }}
         >
           <span className="eventsWord">
@@ -169,15 +169,15 @@ export default function PastExhibitions() {
           </span>
         </h1>
 
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-24 w-full border-b border-zinc-800 pb-8">
+        <div className="flex flex-row items-center justify-between gap-6 sm:gap-6 mb-24 w-full border-b border-zinc-800 pb-8 flex-nowrap">
 
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+          <h2 className="min-w-0 whitespace-nowrap text-2xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
             Past Events
           </h2>
 
           <Link
             href="/events/calendar"
-            className="text-sm text-[#F4A119] tracking-widest uppercase flex items-center gap-3 font-bold hover:gap-5 transition-all"
+            className="shrink-0 whitespace-nowrap text-xs sm:text-sm text-[#F4A119] tracking-widest uppercase flex items-center gap-2 sm:gap-3 font-bold hover:gap-4 transition-all"
           >
             View calendar <span className="text-lg">→</span>
           </Link>
@@ -185,7 +185,7 @@ export default function PastExhibitions() {
 
         {/* Grid */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center w-full max-w-5xl mx-auto mt-[50px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center w-full max-w-5xl mx-auto mt-12.5">
             {filtered.map((ex) => (
               <EventCard key={ex.id} exhibition={ex} />
             ))}

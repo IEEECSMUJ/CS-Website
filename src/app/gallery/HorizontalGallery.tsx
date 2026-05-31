@@ -77,7 +77,7 @@ export default function HorizontalGallery() {
 
     // Mobile specific animations if any
     mm.add("(max-width: 767px)", () => {
-      const items = gsap.utils.toArray<HTMLElement>('.skill-set > div', wrapper.current);
+      const items = gsap.utils.toArray<HTMLElement>('.skill-set > div:not(.no-gsap)', wrapper.current);
 
       items.forEach((item) => {
         gsap.fromTo(item, 
@@ -134,13 +134,13 @@ export default function HorizontalGallery() {
 
         {/* SECTION 1 */}
         <section className="skill-set relative w-full md:w-screen h-auto md:h-full px-6 md:px-12 py-20 md:py-0 flex flex-col md:block gap-32 md:gap-20">
-          <div className="relative md:absolute md:right-[600px] md:top-[150px] w-[80%] md:w-[25vw] h-[40vh] md:h-[35vh] ml-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute right-0 md:right-auto">QATAR_2024</p>
+          <div className="relative md:absolute md:right-[600px] md:top-[150px] w-[80%] md:w-[25vw] h-[40vh] md:h-[35vh] ml-auto mt-8 md:mt-0">
+            <p className="relative z-20 text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:mb-2 md:translate-y-[-25px] md:absolute right-0 md:right-auto">QATAR_2024</p>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa04b14a1ca33c0b25_ln-home-horiz-1.webp"
               alt="Image 1"
               fill
-              className="object-contain object-right md:object-left"
+              className="z-0 translate-y-6 md:translate-y-0 object-contain object-right md:object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
@@ -170,7 +170,7 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] py-10 md:py-0 text-left md:text-right">
+          <div className="relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] pb-4 -translate-y-16 md:translate-y-0 md:mt-0 md:pb-0 md:py-0 text-center md:text-right no-gsap">
             <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn&apos;t matter where</p>
             <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it&apos;s how you</p>
             <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">progress from there.</p>
@@ -204,12 +204,12 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:left-[570px] md:bottom-[80px] w-[70%] md:w-[25vw] h-[40vh] md:h-[25vh] mr-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute">BATTERSEA, 2024</p>
+            <p className="relative z-20 -translate-y-6 text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-15px] md:absolute">BATTERSEA, 2024</p>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa14a96f3cdd2f9a95_ln-home-horiz-6-p-500.webp"
               alt="Image 6"
               fill
-              className="object-contain object-left"
+              className="z-0 object-contain object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />

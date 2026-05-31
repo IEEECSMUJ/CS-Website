@@ -48,9 +48,9 @@ export default function Event() {
         <img
           src="/images/events/tear.svg"
           alt="tear divider"
-          className="absolute w-full -top-[200px] opacity-100"
+          className="absolute w-full -top-17 md:-top-50 opacity-100"
         />
-        <section className="bg-black w-screen overflow-hidden z-40 flex items-center justify-center">
+        <section className="bg-black w-screen overflow-hidden z-40 flex items-center justify-center -mt-12 md:mt-0">
           <Eventcard />
         </section>
       </section>
