@@ -52,12 +52,21 @@ const Card = () => {
   return (
     <div
       ref={sectionRef}
+      className="mobile-newsletter-section"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0px)" : "translateY(60px)",
         transition: "opacity 0.8s ease, transform 0.8s cubic-bezier(0.19, 1, 0.22, 1)",
       }}
     >
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-newsletter-section {
+            padding-top: clamp(3rem, 8vh, 5rem) !important;
+            padding-bottom: clamp(5rem, 12vh, 8rem) !important;
+          }
+        }
+      `}</style>
       <h2 style={{
         textAlign: "center",
         fontWeight: "bold",

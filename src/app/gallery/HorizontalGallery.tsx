@@ -144,6 +144,16 @@ export default function HorizontalGallery() {
       ref={wrapper}
       className="overflow-hidden transition-colors duration-500"
     >
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-gallery-section {
+            padding-top: clamp(6rem, 15vh, 10rem) !important;
+          }
+          .mobile-gallery-end-section {
+            padding-bottom: clamp(6rem, 15vh, 10rem) !important;
+          }
+        }
+      `}</style>
       <div
         ref={scroller}
         className="flex flex-col md:flex-row md:w-[200vw] w-full min-h-screen text-white relative bg-transparent"
@@ -159,7 +169,7 @@ export default function HorizontalGallery() {
         </div>
 
         {/* SECTION 1 */}
-        <section className="skill-set relative w-full md:w-screen h-auto md:h-full px-6 md:px-12 py-20 md:py-0 flex flex-col md:block gap-32 md:gap-20">
+        <section className="skill-set mobile-gallery-section relative w-full md:w-screen h-auto md:h-full px-6 md:px-12 pt-[clamp(3.5rem,10vw,6rem)] pb-20 md:py-0 flex flex-col md:block gap-32 md:gap-20">
           <div className="relative md:absolute md:right-[600px] md:top-[150px] w-[80%] md:w-[25vw] h-[40vh] md:h-[35vh] ml-auto mt-8 md:mt-0">
             <BoxReveal
               align="justify-start md:justify-end"
@@ -237,13 +247,13 @@ export default function HorizontalGallery() {
               viewport={{ once: true, margin: "-10% 0px" }}
               className="w-full flex flex-col items-center md:items-end"
             >
-              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5}>
+              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
                 <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn&apos;t matter where</p>
               </BoxReveal>
-              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5}>
+              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
                 <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it&apos;s how you</p>
               </BoxReveal>
-              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5}>
+              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
                 <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">progress from there.</p>
               </BoxReveal>
             </motion.div>
@@ -251,7 +261,7 @@ export default function HorizontalGallery() {
         </section>
 
         {/* SECTION 2 */}
-        <section className="skill-set relative w-full md:w-screen h-auto md:h-full flex flex-col md:items-center md:justify-center px-6 md:px-12 py-20 md:py-0 gap-32 md:gap-20">
+        <section className="skill-set mobile-gallery-end-section relative w-full md:w-screen h-auto md:h-full flex flex-col md:items-center md:justify-center px-6 md:px-12 py-20 md:py-0 gap-32 md:gap-20">
           <div className="relative md:absolute md:left-[100px] md:top-[150px] w-[60%] md:w-[18vw] h-[35vh] md:h-[18vh] mr-auto">
             <BoxReveal
               align="justify-start"
@@ -375,13 +385,13 @@ export default function HorizontalGallery() {
               viewport={{ once: true, margin: "-10% 0px" }}
               className="w-full flex flex-col items-center md:items-start"
             >
-              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5}>
+              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
                 <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">Since I was 7 years old and had my first</p>
               </BoxReveal>
-              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5}>
+              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
                 <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I&apos;ve worked</p>
               </BoxReveal>
-              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5}>
+              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
                 <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">tirelessly to make that dream come true.</p>
               </BoxReveal>
             </motion.div>

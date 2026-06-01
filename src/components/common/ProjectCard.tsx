@@ -299,10 +299,19 @@ const CascadingCards = () => {
 
   return (
     <div
+      className="mobile-projects-wrapper"
       style={{
         backgroundColor: 'transparent',
       }}
     >
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-projects-wrapper {
+            padding-top: clamp(3rem, 8vh, 5rem) !important;
+            padding-bottom: clamp(3rem, 8vh, 5rem) !important;
+          }
+        }
+      `}</style>
       {isMobile
         ? <MobileGrid onProgress={handleProgress} />
         : <DesktopScroll onProgress={handleProgress} />}

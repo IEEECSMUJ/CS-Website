@@ -46,17 +46,29 @@ export default function CardStack() {
 
   return (
     <div id="card-stack-section">
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-events-title-container {
+            padding-top: clamp(6rem, 15vh, 10rem) !important;
+          }
+          .mobile-events-cards-section {
+            min-height: 60vh !important;
+            padding-bottom: clamp(4rem, 10vh, 6rem) !important;
+            padding-top: 2rem !important;
+          }
+        }
+      `}</style>
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-10% 0px" }}
-        className="w-full flex justify-center"
+        className="mobile-events-title-container w-full flex justify-center"
         style={{
           paddingTop: "3rem",
           marginBottom: "2rem",
         }}
       >
-        <BoxReveal align="justify-center" boxColor="#f9ba1f">
+        <BoxReveal align="justify-center" boxColor="#f9ba1f" widthClass="w-fit">
           <h2 style={{
             display: "inline-block",
             textAlign: "center",
@@ -72,7 +84,7 @@ export default function CardStack() {
           </h2>
         </BoxReveal>
       </motion.div>
-      <section ref={containerRef} className={styles.container} style={{ minHeight: "100vh", paddingBottom: "10rem", paddingTop: "4rem" }}>
+      <section ref={containerRef} className={`${styles.container} mobile-events-cards-section`} style={{ minHeight: "100vh", paddingBottom: "10rem", paddingTop: "4rem" }}>
         <div className={`${styles.cards} ${open ? styles.open : ""}`}>
           {images.map((src, index) => (
             <div key={index} className={styles.card}>
