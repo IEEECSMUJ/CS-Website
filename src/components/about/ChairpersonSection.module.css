@@ -10,7 +10,7 @@
     position: relative;
     z-index: 20;
     min-height: 100vh;
-    background: #faf3e1;           
+    background: #0d0d0d;           
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@
     font-size: clamp(0.65rem, 0.9vw, 0.8rem);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #888;
+    color: #94a3b8;
     font-weight: 500;
 }
 
@@ -59,7 +59,7 @@
     font-size: clamp(2.8rem, 5.5vw, 5rem);
     font-weight: 800;
     line-height: 1.0;
-    color: #0d0d0d;
+    color: #ffffff;
     letter-spacing: -0.03em;
     font-family: Georgia, 'Times New Roman', serif;
 }
@@ -69,12 +69,14 @@
     position: relative;
     height: 100vh;
     align-self: stretch;
+    overflow: hidden;
 }
 
 .photo {
-    mix-blend-mode: multiply;    
+    mix-blend-mode: normal;    
     object-position: top center;
     filter: grayscale(20%);
+    transform: scale(1.02);
 }
 
 .photoFadeLeft {
@@ -82,7 +84,7 @@
     top: 0; left: 0;
     width: 35%;
     height: 100%;
-    background: linear-gradient(to right, var(--fade-color, #faf3e1), transparent);
+    background: linear-gradient(to right, var(--fade-color, #0d0d0d), transparent);
     pointer-events: none;
     z-index: 1;
 }
@@ -92,7 +94,7 @@
     top: 0; right: 0;
     width: 35%;
     height: 100%;
-    background: linear-gradient(to left, var(--fade-color, #faf3e1), transparent);
+    background: linear-gradient(to left, var(--fade-color, #0d0d0d), transparent);
     pointer-events: none;
     z-index: 1;
 }
@@ -101,7 +103,7 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 35%;
-    background: linear-gradient(to top, var(--fade-color, #faf3e1), transparent);
+    background: linear-gradient(to top, var(--fade-color, #0d0d0d), transparent);
     pointer-events: none;
     z-index: 1;
 }
@@ -120,7 +122,7 @@
 .quote {
     font-size: clamp(0.95rem, 1.3vw, 1.15rem);
     line-height: 1.85;
-    color: #333;
+    color: #e2e8f0;
     text-align: center;
     font-style: italic;
 }
@@ -128,7 +130,7 @@
 .name {
     font-size: clamp(0.9rem, 1.1vw, 1rem);
     font-weight: 700;
-    color: #111;
+    color: #ffffff;
     text-align: center;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -136,7 +138,7 @@
 
 .role {
     font-size: clamp(0.75rem, 0.9vw, 0.85rem);
-    color: #888;
+    color: #94a3b8;
     text-align: center;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -185,18 +187,18 @@
         position: absolute;
         top: 0; left: 0; right: 0;
         height: 20%;
-        background: linear-gradient(to bottom, var(--fade-color, #faf3e1), transparent);
+        background: linear-gradient(to bottom, var(--fade-color, #0d0d0d), transparent);
         pointer-events: none;
         z-index: 1;
     }
 
     .photoFadeLeft {
-        background: linear-gradient(to right, var(--fade-color, #faf3e1), transparent);
+        background: linear-gradient(to right, var(--fade-color, #0d0d0d), transparent);
     }
     .photoFadeRight {
-        background: linear-gradient(to left, var(--fade-color, #faf3e1), transparent);
+        background: linear-gradient(to left, var(--fade-color, #0d0d0d), transparent);
     }
     .photoFadeBottom {
-        background: linear-gradient(to top, var(--fade-color, #faf3e1), transparent);
+        background: linear-gradient(to top, var(--fade-color, #0d0d0d), transparent);
     }
 }

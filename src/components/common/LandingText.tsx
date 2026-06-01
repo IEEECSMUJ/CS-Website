@@ -44,12 +44,12 @@ export default function ImpactText() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-25% 0px" }}
-            className="text-[1.7rem] sm:text-[3rem] md:text-[4.2rem] lg:text-[5.5rem] xl:text-[6.5rem] leading-[1.0] sm:leading-[0.95] lg:leading-[0.9] tracking-tight uppercase font-black flex flex-col items-center w-full"
+            className="text-[1.5rem] sm:text-[2.6rem] md:text-[3.6rem] lg:text-[4.8rem] xl:text-[5.8rem] leading-[1.0] sm:leading-[0.95] lg:leading-[0.9] tracking-tight uppercase font-normal flex flex-col items-center w-full"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
 
             {/* Line 1 */}
-            <BoxReveal duration={2.5} widthClass="w-fit">
+            <BoxReveal duration={2.5} widthClass="w-fit" paddingClass="py-0 px-2 sm:py-0.5">
               <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
                 <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
                   <span className="uppercase">REDEFINING</span>
@@ -59,44 +59,67 @@ export default function ImpactText() {
             </BoxReveal>
 
             {/* Line 2 */}
-            <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
-              <BoxReveal duration={2.5} widthClass="w-fit">
-                <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-6">
-                  <Word>DRIVING</Word>
-                  <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
-                    <span className="uppercase">INNOVATION</span>
-                  </Word>
-                </div>
-              </BoxReveal>
-              <BoxReveal duration={2.5} widthClass="w-fit">
+            <BoxReveal duration={2.5} widthClass="w-fit" paddingClass="py-0 px-2 sm:py-0.5">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+                <Word>DRIVING</Word>
+                <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
+                  <span className="uppercase">INNOVATION</span>
+                </Word>
                 <Word>FORWARD.</Word>
-              </BoxReveal>
-            </div>
+              </div>
+            </BoxReveal>
 
             {/* Line 3 */}
-            <BoxReveal duration={2.5} widthClass="w-fit">
+            <BoxReveal duration={2.5} widthClass="w-fit" paddingClass="py-0 px-2 sm:py-0.5">
               <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
-                <Word>UNITING</Word>
+                <Word>WORKING</Word>
+                <Word>TO</Word>
                 <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
-                  <span className="uppercase">STRENGTHS,</span>
+                  <span className="uppercase">UNITE</span>
                 </Word>
               </div>
             </BoxReveal>
 
             {/* Line 4 */}
-            <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
-              <BoxReveal duration={2.5} widthClass="w-fit">
-                <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-6">
-                  <Word>SHAPING</Word>
-                  <Word>TECHNOLOGY'S</Word>
-                </div>
-              </BoxReveal>
-              <BoxReveal duration={2.5} widthClass="w-fit">
+            <BoxReveal duration={2.5} widthClass="w-fit" paddingClass="py-0 px-2 sm:py-0.5">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+                <Word>PERSPECTIVES</Word>
+                <Word>AND</Word>
                 <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
-                  <span className="uppercase">FUTURE.</span>
+                  <span className="uppercase">STRENGTHS.</span>
                 </Word>
-              </BoxReveal>
-            </div>
+              </div>
+            </BoxReveal>
+
+            {/* Line 5 */}
+            <BoxReveal duration={2.5} widthClass="w-fit" paddingClass="py-0 px-2 sm:py-0.5">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+                <Word>SHAPING</Word>
+                <Word>A</Word>
+                <Word>LEGACY</Word>
+              </div>
+            </BoxReveal>
+
+            {/* Line 6 */}
+            <BoxReveal duration={2.5} widthClass="w-fit" paddingClass="py-0 px-2 sm:py-0.5">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+                <Word>IN</Word>
+                <Word>TECHNOLOGY,</Word>
+                <Word>FROM</Word>
+              </div>
+            </BoxReveal>
+
+            {/* Line 7 */}
+            <BoxReveal duration={2.5} widthClass="w-fit" paddingClass="py-0 px-2 sm:py-0.5">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+                <Word>TODAY</Word>
+                <Word>TO</Word>
+                <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
+                  <span className="uppercase">FOREVER</span>
+                </Word>
+                <Word>MORE.</Word>
+              </div>
+            </BoxReveal>
 
           </motion.h2>
         </div>

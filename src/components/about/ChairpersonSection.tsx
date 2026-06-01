@@ -27,8 +27,8 @@ const LEADERS: Leader[] = [
         title: ["Chairperson's", "Words"],
         image: "https://images.prismic.io/ieeemuj/ZnJjw5m069VX13S1_IMG-20240405-WA0024~2-SamakshGupta.jpg?auto=format,compress",
         quote: "Serving computing at its best with inclusion and diversity is the prime motto of the IEEE Computer Society. We aim to empower every student to push the boundaries of technology and innovation.",
-        bgColor: "#faf3e1",
-        fadeColor: "#faf3e1"
+        bgColor: "#0d0d0d",
+        fadeColor: "#0d0d0d"
     },
     {
         name: "Tamanna Yadav",
@@ -37,8 +37,8 @@ const LEADERS: Leader[] = [
         title: ["Vice", "Chairperson"],
         image: "https://images.prismic.io/ieeemuj/ZnHEBZm069VX12wA_IMG_20240617_153104-TamannaYadav.jpg?auto=format,compress",
         quote: "Collaboration is the key to creating impactful technology. At IEEE CS, we foster an environment where diverse ideas converge to solve real-world problems and nurture future leaders.",
-        bgColor: "#f7f0e8",
-        fadeColor: "#f7f0e8"
+        bgColor: "#0d0d0d",
+        fadeColor: "#0d0d0d"
     },
     {
         name: "Salaj Singh Bisht",
@@ -47,8 +47,8 @@ const LEADERS: Leader[] = [
         title: ["General", "Secretary"],
         image: "https://images.prismic.io/ieeemuj/ZnHLL5m069VX12yn_IMG_20240416_161408-SalajBisht.jpg?auto=format,compress",
         quote: "Operational excellence and transparent communication form the backbone of our community. We strive to create seamless opportunities for growth, learning, and student empowerment.",
-        bgColor: "#ebdcd0",
-        fadeColor: "#ebdcd0"
+        bgColor: "#0d0d0d",
+        fadeColor: "#0d0d0d"
     },
     {
         name: "Aryan Verma",
@@ -57,8 +57,8 @@ const LEADERS: Leader[] = [
         title: ["Managing", "Director"],
         image: "https://images.prismic.io/ieeemuj/aENAFrh8WN-LVx3f_IMG_0788-AryanVerma.jpeg?auto=format,compress",
         quote: "Turning vision into execution is our goal. By managing resources and coordinating initiatives effectively, we ensure our members have the platform to build and excel.",
-        bgColor: "#f0e6df",
-        fadeColor: "#f0e6df"
+        bgColor: "#0d0d0d",
+        fadeColor: "#0d0d0d"
     },
     {
         name: "Vinayak Jajoo",
@@ -67,8 +67,8 @@ const LEADERS: Leader[] = [
         title: ["Treasurer's", "Perspective"],
         image: "https://images.prismic.io/ieeemuj/aENAfrh8WN-LVx4C_IMG_6284-VinayakJajoo.heic?auto=format,compress",
         quote: "Investing in student potential yields the greatest returns. We manage our resources diligently to fund cutting-edge workshops, hackathons, and projects that drive innovation.",
-        bgColor: "#e8dfd8",
-        fadeColor: "#e8dfd8"
+        bgColor: "#0d0d0d",
+        fadeColor: "#0d0d0d"
     },
     {
         name: "Bhavya Jaggi",
@@ -77,8 +77,8 @@ const LEADERS: Leader[] = [
         title: ["Human", "Resources"],
         image: "https://images.prismic.io/ieeemuj/aEM_tbh8WN-LVx3E_20250421_183325-BhavyaJaggi.jpg?auto=format,compress",
         quote: "People are our greatest asset. Our mission is to nurture talent, build strong bonds within our team, and maintain a supportive, growth-oriented culture for all members.",
-        bgColor: "#ede6df",
-        fadeColor: "#ede6df"
+        bgColor: "#0d0d0d",
+        fadeColor: "#0d0d0d"
     },
     {
         name: "Neil Gupta",
@@ -87,8 +87,8 @@ const LEADERS: Leader[] = [
         title: ["Technical", "Insights"],
         image: "https://images.prismic.io/ieeemuj/aENAUbh8WN-LVx31_IMG_2745-NeilGupta.jpeg?auto=format,compress",
         quote: "Innovation is born from curiosity and code. We are committed to building robust technical foundations, encouraging hands-on experimentation, and mastering next-generation technologies.",
-        bgColor: "#e5ded8",
-        fadeColor: "#e5ded8"
+        bgColor: "#0d0d0d",
+        fadeColor: "#0d0d0d"
     }
 ];
 
