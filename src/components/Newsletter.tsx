@@ -91,7 +91,10 @@ const Card = () => {
             >
               <div
                 data-text={edition.title}
-                style={{ "--r": edition.rotation } as React.CSSProperties}
+                style={{ 
+                  "--r": edition.rotation,
+                  "--i": index - 1
+                } as React.CSSProperties}
                 className="glass"
               >
                 <img
@@ -118,6 +121,7 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    --spread-width: 188px;
   }
 
   .glass-link {
@@ -135,18 +139,18 @@ const StyledWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     border-radius: 10px;
     margin: 0 -80px;
     /* Removed backdrop-filter: blur(10px) — forces per-frame recompositing
        of all layers behind this element during scroll, causing jitter. */
     transform: rotate(calc(var(--r) * 1deg));
     overflow: hidden;
+    will-change: transform;
   }
 
   .container:hover .glass {
-    transform: rotate(0deg);
-    margin: 0 14px;
+    transform: translateX(calc(var(--i) * var(--spread-width))) rotate(0deg);
   }
 
   .glass-image {
@@ -177,6 +181,9 @@ const StyledWrapper = styled.div`
   /* ---------- Responsive ---------- */
 
   @media (max-width: 1024px) {
+    .container {
+      --spread-width: 148px;
+    }
     .container .glass {
       width: 220px;
       height: 320px;
@@ -186,6 +193,9 @@ const StyledWrapper = styled.div`
 
   /* Tablet */
 @media (max-width: 768px) {
+  .container {
+    --spread-width: 118px;
+  }
   .container .glass {
     width: 180px;
     height: 260px;
@@ -195,6 +205,9 @@ const StyledWrapper = styled.div`
 
 /* Mobile */
 @media (max-width: 480px) {
+  .container {
+    --spread-width: 98px;
+  }
   .container .glass {
     width: 140px;
     height: 210px;
