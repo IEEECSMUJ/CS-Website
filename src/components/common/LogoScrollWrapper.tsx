@@ -85,9 +85,9 @@ export default function LogoScrollWrapper() {
           },
           {
             x: startX(),
-            y: startY() - 80,
-            scale: 0.5,
-            opacity: 0,
+            y: vh() * 0.72 - logoH() * 0.5,
+            scale: 0.65,
+            opacity: 0.85,
             ease: "power1.inOut",
             duration: 1,
           },
@@ -133,14 +133,11 @@ export default function LogoScrollWrapper() {
       end: "bottom 50%",
       scrub: true,
       onUpdate: (self) => {
-        if (!isMobile()) {
-          gsap.set(el, { opacity: 1 - self.progress });
-        }
+        const baseOpacity = isMobile() ? 0.85 : 1;
+        gsap.set(el, { opacity: baseOpacity * (1 - self.progress) });
       },
       onLeaveBack: () => {
-        if (!isMobile()) {
-          gsap.set(el, { opacity: 1 });
-        }
+        gsap.set(el, { opacity: isMobile() ? 0.85 : 1 });
       },
     });
 
