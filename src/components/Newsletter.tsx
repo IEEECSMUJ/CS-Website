@@ -206,12 +206,12 @@ const StyledWrapper = styled.div`
 /* Mobile */
 @media (max-width: 480px) {
   .container {
-    --spread-width: 98px;
+    --spread-width: 18vw;
   }
   .container .glass {
-    width: 140px;
-    height: 210px;
-    margin: 0 -35px;
+    width: 28vw;
+    height: 42vw;
+    margin: 0 -7vw;
   }
 }
 `;

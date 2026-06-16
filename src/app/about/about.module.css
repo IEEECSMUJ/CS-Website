@@ -55,7 +55,4 @@
         padding-left: 5vw;
         justify-content: center;
     }
-    :global(#logo-mover) {
-        display: none !important;
-    }
 }

@@ -147,30 +147,161 @@ export default function HorizontalGallery() {
       <style>{`
         @media (max-width: 767px) {
           .mobile-gallery-section {
-            padding-top: clamp(6rem, 15vh, 10rem) !important;
+            padding-top: clamp(2rem, 5vh, 4rem) !important;
+            padding-bottom: 0 !important;
           }
           .mobile-gallery-end-section {
-            padding-bottom: clamp(6rem, 15vh, 10rem) !important;
+            padding-top: 0 !important;
+            padding-bottom: clamp(2rem, 5vh, 4rem) !important;
+          }
+          
+          .skill-set {
+            display: contents !important;
+          }
+          
+          .gallery-scroller-canvas {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 5.5rem !important;
+            padding: 4rem 1.5rem !important;
+            height: auto !important;
+          }
+          
+          .gallery-scroller-canvas img {
+            object-fit: cover !important;
+            object-position: center !important;
+          }
+
+          .gallery-item-1 > *:first-child,
+          .gallery-item-2 > *:first-child,
+          .gallery-item-3 > *:first-child,
+          .gallery-item-4 > *:first-child,
+          .gallery-item-5 > *:first-child,
+          .gallery-item-6 > *:first-child,
+          .gallery-item-7 > *:first-child,
+          .gallery-item-8 > *:first-child,
+          .gallery-item-9 > *:first-child {
+            position: absolute !important;
+            bottom: 100% !important;
+            left: 0 !important;
+            width: 100% !important;
+            margin-bottom: 0.4rem !important;
+            display: flex !important;
+            z-index: 30 !important;
+          }
+          
+          .gallery-item-1 {
+            order: 1 !important;
+            width: 65% !important;
+            height: 38vh !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-7 {
+            order: 2 !important;
+            width: 60% !important;
+            height: 34vh !important;
+            margin-left: auto !important;
+            margin-right: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-3 {
+            order: 3 !important;
+            width: 78% !important;
+            height: 42vh !important;
+            margin-left: 0 !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-text-1 {
+            order: 4 !important;
+            width: 90% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 1rem !important;
+            margin-bottom: 1rem !important;
+            text-align: center !important;
+            transform: none !important;
+          }
+          .gallery-item-5 {
+            order: 5 !important;
+            width: 65% !important;
+            height: 38vh !important;
+            margin-left: auto !important;
+            margin-right: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-4 {
+            order: 6 !important;
+            width: 60% !important;
+            height: 34vh !important;
+            margin-left: 0 !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-6 {
+            order: 7 !important;
+            width: 70% !important;
+            height: 36vh !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-8 {
+            order: 8 !important;
+            width: 75% !important;
+            height: 40vh !important;
+            margin-left: auto !important;
+            margin-right: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-2 {
+            order: 9 !important;
+            width: 65% !important;
+            height: 34vh !important;
+            margin-left: 0 !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-9 {
+            order: 11 !important;
+            width: 70% !important;
+            height: 36vh !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+          }
+          .gallery-item-text-2 {
+            order: 10 !important;
+            width: 90% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-top: 1rem !important;
+            margin-bottom: 1rem !important;
+            text-align: center !important;
+            transform: none !important;
           }
         }
       `}</style>
       <div
         ref={scroller}
-        className="flex flex-col md:flex-row md:w-[200vw] w-full min-h-screen text-white relative bg-transparent"
+        className="gallery-scroller-canvas flex flex-col md:flex-row md:w-[200vw] w-full min-h-screen text-white relative bg-transparent"
       >
-        {/* Background Curves (Mobile) */}
-        <div className="absolute inset-x-0 top-0 h-full w-full pointer-events-none md:hidden overflow-hidden opacity-20">
-          <svg className="w-full h-full" viewBox="0 0 400 4000" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M400 0C-100 800 500 1600 0 2400C500 3200 -100 3800 400 4000" stroke="#f9ba1f" strokeWidth="2" />
-            <circle cx="200" cy="800" r="250" stroke="#f9ba1f" strokeWidth="0.5" />
-            <circle cx="100" cy="2000" r="200" stroke="#f9ba1f" strokeWidth="0.5" />
-            <circle cx="350" cy="3400" r="300" stroke="#f9ba1f" strokeWidth="0.5" />
-          </svg>
-        </div>
+
 
         {/* SECTION 1 */}
         <section className="skill-set mobile-gallery-section relative w-full md:w-screen h-auto md:h-full px-6 md:px-12 pt-[clamp(3.5rem,10vw,6rem)] pb-20 md:py-0 flex flex-col md:block gap-32 md:gap-20">
-          <div className="relative md:absolute md:right-[600px] md:top-[150px] w-[80%] md:w-[25vw] h-[40vh] md:h-[35vh] ml-auto mt-8 md:mt-0">
+          <div className="gallery-item-1 relative md:absolute md:right-[600px] md:top-[150px] w-[80%] md:w-[25vw] h-[40vh] md:h-[35vh] ml-auto mt-8 md:mt-0">
             <BoxReveal
               align="justify-start md:justify-end"
               className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
@@ -181,7 +312,7 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR_2024</p>
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR, 2024</p>
             </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa04b14a1ca33c0b25_ln-home-horiz-1.webp"
@@ -193,7 +324,7 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[600px] md:bottom-[120px] w-[65%] md:w-[15vw] h-[35vh] md:h-[20vh] mr-auto">
+          <div className="gallery-item-2 relative md:absolute md:right-[600px] md:bottom-[120px] w-[65%] md:w-[15vw] h-[35vh] md:h-[20vh] mr-auto">
             <BoxReveal
               align="justify-start"
               className="md:translate-y-[-25px] md:absolute mb-2"
@@ -204,7 +335,7 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR_2024</p>
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR, 2024</p>
             </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baab12220595c8223b3_ln-home-horiz-2.webp"
@@ -216,10 +347,10 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[0px] md:bottom-[120px] w-[75%] md:w-[28vw] h-[45vh] md:h-[45vh] ml-auto">
+          <div className="gallery-item-3 relative md:absolute md:right-[0px] md:bottom-[120px] w-[75%] md:w-[28vw] h-[45vh] md:h-[45vh] ml-auto">
             <BoxReveal
-              align="justify-start md:justify-end"
-              className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
+              align="justify-start"
+              className="md:translate-y-[-25px] md:absolute mb-2"
               widthClass="w-fit"
               marginClass="my-0"
               paddingClass="p-0"
@@ -227,7 +358,7 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR_2024</p>
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">MIAMI GP, 2024</p>
             </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302babcf12f0111d96322e_ln-home-horiz-3-p-500.webp"
@@ -239,7 +370,7 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] pb-4 -translate-y-16 md:translate-y-0 md:mt-0 md:pb-0 md:py-0 text-center md:text-right no-gsap flex flex-col items-center md:items-end">
+          <div className="gallery-item-text-1 relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] pb-4 -translate-y-16 md:translate-y-0 md:mt-0 md:pb-0 md:py-0 text-center md:text-right no-gsap flex flex-col items-center md:items-end">
             <motion.div
               variants={textContainerVariants}
               initial="hidden"
@@ -262,7 +393,7 @@ export default function HorizontalGallery() {
 
         {/* SECTION 2 */}
         <section className="skill-set mobile-gallery-end-section relative w-full md:w-screen h-auto md:h-full flex flex-col md:items-center md:justify-center px-6 md:px-12 py-20 md:py-0 gap-32 md:gap-20">
-          <div className="relative md:absolute md:left-[100px] md:top-[150px] w-[60%] md:w-[18vw] h-[35vh] md:h-[18vh] mr-auto">
+          <div className="gallery-item-4 relative md:absolute md:left-[100px] md:top-[150px] w-[60%] md:w-[18vw] h-[35vh] md:h-[18vh] mr-auto">
             <BoxReveal
               align="justify-start"
               className="md:translate-y-[-25px] md:absolute mb-2"
@@ -285,9 +416,9 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:left-[180px] md:bottom-[180px] w-[80%] md:w-[27vw] h-[45vh] md:h-[27vh] ml-auto">
+          <div className="gallery-item-5 relative md:absolute md:left-[180px] md:bottom-[180px] w-[80%] md:w-[27vw] h-[45vh] md:h-[27vh] ml-auto">
             <BoxReveal
-              align="justify-start md:justify-end"
+              align="justify-end"
               className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
               widthClass="w-fit"
               marginClass="my-0"
@@ -308,7 +439,7 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:left-[570px] md:bottom-[80px] w-[70%] md:w-[25vw] h-[40vh] md:h-[25vh] mr-auto">
+          <div className="gallery-item-6 relative md:absolute md:left-[570px] md:bottom-[80px] w-[70%] md:w-[25vw] h-[40vh] md:h-[25vh] mr-auto">
             <BoxReveal
               align="justify-start"
               className="-translate-y-6 md:translate-y-[-25px] md:absolute mb-2 z-20"
@@ -331,9 +462,9 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[720px] md:top-[180px] w-[65%] md:w-[20vw] h-[35vh] md:h-[20vh] ml-auto">
+          <div className="gallery-item-7 relative md:absolute md:right-[720px] md:top-[180px] w-[65%] md:w-[20vw] h-[35vh] md:h-[20vh] ml-auto">
             <BoxReveal
-              align="justify-start md:justify-end"
+              align="justify-end"
               className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
               widthClass="w-fit"
               marginClass="my-0"
@@ -342,7 +473,7 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">HIGH PERFORMANCE GALA, 2024</p>
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">FIA PRIZE GIVING, 2024</p>
             </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302bab3ee6e26b1f434a7d_ln-home-horiz-7.webp"
@@ -354,10 +485,10 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[200px] md:top-[150px] w-[85%] md:w-[30vw] h-[55vh] md:h-[48vh] mr-auto">
+          <div className="gallery-item-8 relative md:absolute md:right-[200px] md:top-[150px] w-[85%] md:w-[30vw] h-[55vh] md:h-[48vh] mr-auto">
             <BoxReveal
-              align="justify-start"
-              className="md:translate-y-[-25px] md:absolute mb-2"
+              align="justify-end"
+              className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
               widthClass="w-fit"
               marginClass="my-0"
               paddingClass="p-0"
@@ -377,7 +508,7 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[200px] md:bottom-[180px] w-full md:w-[30vw] py-10 md:py-0 text-center md:text-left flex flex-col items-center md:items-start">
+          <div className="gallery-item-text-2 relative md:absolute md:right-[200px] md:bottom-[180px] w-full md:w-[30vw] py-10 md:py-0 text-center md:text-left flex flex-col items-center md:items-start">
             <motion.div
               variants={textContainerVariants}
               initial="hidden"
@@ -397,7 +528,7 @@ export default function HorizontalGallery() {
             </motion.div>
           </div>
 
-          <div className="relative md:absolute md:right-[40px] md:bottom-[130px] w-full md:w-[10vw] h-[40vh] md:h-[25vh]">
+          <div className="gallery-item-9 relative md:absolute md:right-[40px] md:bottom-[130px] w-full md:w-[10vw] h-[40vh] md:h-[25vh]">
             <BoxReveal
               align="justify-start"
               className="md:translate-y-[-25px] md:absolute mb-2"

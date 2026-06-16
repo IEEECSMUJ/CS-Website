@@ -21,8 +21,10 @@ export default function LogoScrollWrapper() {
     const logoW = () => el.offsetWidth;
     const logoH = () => el.offsetHeight;
 
-    const startX = () => vw() - logoW() - 70;
-    const startY = () => vh() * 0.5 - logoH() * 0.5;
+    const isMobile = () => vw() <= 768;
+
+    const startX = () => isMobile() ? (vw() * 0.5 - logoW() * 0.5) : (vw() - logoW() - 70);
+    const startY = () => isMobile() ? (vh() * 0.28 - logoH() * 0.5) : (vh() * 0.5 - logoH() * 0.5);
     const dropX = () => vw() - logoW() - 66;
     const dropY = () => vh() * 0.58 - logoH() * 0.5;
     const sweepX = () => vw() * 0.58 - logoW() * 0.5;
@@ -41,7 +43,7 @@ export default function LogoScrollWrapper() {
       }
 
       // Pre-set fresh values to prevent layout flash on build
-      gsap.set(el, { x: startX(), y: startY(), opacity: 1, visibility: "visible" });
+      gsap.set(el, { x: startX(), y: startY(), scale: 1, opacity: 1, visibility: "visible" });
       
       // Initialize the progress ref to 0
       progressRef.current.value = 0;
@@ -73,21 +75,52 @@ export default function LogoScrollWrapper() {
       }, 0);
 
       // Map scroll progress to 3D logo coordinates along curved motion path
-      tl.to(el, {
-        motionPath: {
-          path: [
-            { x: startX(), y: startY() },
-            { x: dropX(), y: dropY() },
-            { x: sweepX(), y: sweepY() },
-            { x: hookX(), y: hookY() },
-            { x: endX(), y: endY() },
-          ],
-          curviness: 1.45,
-          autoRotate: false,
-        },
-        ease: "power1.inOut",
-        duration: 1,
-      }, 0);
+      if (isMobile()) {
+        tl.fromTo(el,
+          {
+            x: startX(),
+            y: startY(),
+            scale: 1,
+            opacity: 1,
+          },
+          {
+            x: startX(),
+            y: vh() * 0.72 - logoH() * 0.5,
+            scale: 0.65,
+            opacity: 0.85,
+            ease: "power1.inOut",
+            duration: 1,
+          },
+          0
+        );
+      } else {
+        tl.fromTo(el,
+          {
+            x: startX(),
+            y: startY(),
+            scale: 1,
+            opacity: 1,
+          },
+          {
+            motionPath: {
+              path: [
+                { x: startX(), y: startY() },
+                { x: dropX(), y: dropY() },
+                { x: sweepX(), y: sweepY() },
+                { x: hookX(), y: hookY() },
+                { x: endX(), y: endY() },
+              ],
+              curviness: 1.45,
+              autoRotate: false,
+            },
+            scale: 1,
+            opacity: 1,
+            ease: "power1.inOut",
+            duration: 1,
+          },
+          0
+        );
+      }
     };
 
     buildTimeline();
@@ -100,10 +133,11 @@ export default function LogoScrollWrapper() {
       end: "bottom 50%",
       scrub: true,
       onUpdate: (self) => {
-        gsap.set(el, { opacity: 1 - self.progress });
+        const baseOpacity = isMobile() ? 0.85 : 1;
+        gsap.set(el, { opacity: baseOpacity * (1 - self.progress) });
       },
       onLeaveBack: () => {
-        gsap.set(el, { opacity: 1 });
+        gsap.set(el, { opacity: isMobile() ? 0.85 : 1 });
       },
     });
 
@@ -123,8 +157,8 @@ export default function LogoScrollWrapper() {
         position: "fixed",
         top: 0,
         left: 0,
-        width: "clamp(240px, 30vw, 440px)",
-        height: "clamp(240px, 30vw, 440px)",
+        width: "clamp(150px, 30vw, 440px)",
+        height: "clamp(150px, 30vw, 440px)",
         pointerEvents: "none",
         zIndex: 10,
         willChange: "transform",
