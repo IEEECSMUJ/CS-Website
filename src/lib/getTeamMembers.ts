@@ -19,7 +19,10 @@ export const getTeamMembers = unstable_cache(
       SELECT name, role, image_url, "group", linkedin_url, github_url, instagram_url
       FROM team_members
       WHERE is_active = true
-      ORDER BY display_order ASC, name ASC
+      ORDER BY 
+        CASE "group" WHEN 'ec' THEN 1 WHEN 'web' THEN 2 WHEN 'core' THEN 3 ELSE 4 END,
+        display_order ASC,
+        name ASC
     ` as unknown as Record<string, unknown>[];
 
     return {
@@ -29,5 +32,5 @@ export const getTeamMembers = unstable_cache(
     };
   },
   ['team-members'],
-  { revalidate: false }
+  { revalidate: 3600 } // Revalidate every hour, or manually via webhook
 );
