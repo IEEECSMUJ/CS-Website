@@ -211,13 +211,25 @@ export default function PastExhibitions({ events }: PastExhibitionsProps) {
 
         <div className="flex flex-row items-center justify-between gap-6 sm:gap-6 mb-24 w-full border-b border-zinc-800 pb-8 flex-nowrap">
 
-          <h2 className="min-w-0 whitespace-nowrap text-2xl sm:text-4xl md:text-5xl font-bold text-white leading-tight tracking-tight">
+          <h2
+            className="min-w-0 whitespace-nowrap text-2xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight"
+            style={{
+              background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             Past Events
           </h2>
 
           <Link
             href="/events/calendar"
-            className="shrink-0 whitespace-nowrap text-base sm:text-lg md:text-xl text-[#F4A119] tracking-widest uppercase flex items-center gap-2 sm:gap-3 font-bold hover:gap-4 transition-all"
+            className="shrink-0 whitespace-nowrap text-base sm:text-lg md:text-xl tracking-widest uppercase flex items-center gap-2 sm:gap-3 font-bold hover:gap-4 transition-all"
+            style={{
+              background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
           >
             View calendar <span className="text-xl sm:text-2xl">→</span>
           </Link>
