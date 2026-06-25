@@ -16,6 +16,8 @@
   padding: 24px 32px;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   color: #ffffff;
+  position: relative;
+  z-index: 30;
 }
 
 .headerLeft {

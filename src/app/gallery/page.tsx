@@ -15,9 +15,35 @@ export default function Gallery() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    // Start muted to ensure autoplay is allowed by the browser
     video.muted = true;
+    video.loop = false;
     video.load();
-    video.play().catch(() => {});
+    video.play().catch((err) => {
+      console.log("Autoplay blocked or failed:", err);
+    });
+
+    // Unmute upon first user interaction
+    const unmute = () => {
+      video.muted = false;
+      video.play().catch(() => {});
+      cleanup();
+    };
+
+    const cleanup = () => {
+      document.removeEventListener("click", unmute);
+      document.removeEventListener("touchstart", unmute);
+      document.removeEventListener("keydown", unmute);
+    };
+
+    document.addEventListener("click", unmute);
+    document.addEventListener("touchstart", unmute);
+    document.addEventListener("keydown", unmute);
+
+    return () => {
+      cleanup();
+    };
   }, []);
 
   return (<>
