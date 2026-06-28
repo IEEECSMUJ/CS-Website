@@ -14,7 +14,7 @@ const IMAGES = [
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782560890144_eiggr.jpeg',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562282146_spph3r.avif',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562529818_eoed.avif',
-    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562541741_5xlx0i.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782659857657_tzsw4o.avif',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562551042_2702i.avif',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562562411_f2i9c.avif',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562302512_z4c2gm.avif',
@@ -24,7 +24,7 @@ const IMAGES = [
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782626827226_96d99l.avif',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782628087084_7yu295.avif',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782626676553_vp5eo.webp',
-    'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600&q=80',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782659869512_du1u.avif',
     'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782626687798_61ilal.webp',
 ];
 
