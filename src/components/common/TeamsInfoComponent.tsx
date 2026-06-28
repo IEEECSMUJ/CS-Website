@@ -51,7 +51,7 @@ function CountUp({ to, from = 0, delay = 0, duration = 1400, separator = "", sta
 
 const STATS = [
   { label: "Members",   value: 1500, ticks: 15, delay: 0    },
-  { label: "Events",    value: 20,   ticks: 8,  delay: 0.15 },
+  { label: "Events",    value: 30,   ticks: 8,  delay: 0.15 },
   { label: "Societies", value: 3,    ticks: 3,  delay: 0.3  },
   { label: "Mentors",   value: 10,   ticks: 5,  delay: 0.45 },
 ] as const;
@@ -304,7 +304,7 @@ export default function TeamsInfoComponent() {
         <img
           className="h-[30vh] md:h-[40vh] lg:h-[50vh] object-contain"
           style={{ marginTop: "-55px" }}
-          src="/images/events/2.avif"
+          src="/images/events/website poster.png"
           alt="img"
         />
       </div>
