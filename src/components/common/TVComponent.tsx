@@ -112,7 +112,7 @@ export default function TVComponent() {
   }, [currentCh, switchTo]);
 
   const restartAutoTimer = useCallback(
-    (delayMs = 3000) => {
+    (delayMs = 1500) => {
       if (autoTimerRef.current) {
         clearInterval(autoTimerRef.current);
       }
@@ -124,7 +124,7 @@ export default function TVComponent() {
   );
 
   useEffect(() => {
-    restartAutoTimer(3000);
+    restartAutoTimer(1500);
     return () => {
       if (autoTimerRef.current) {
         clearInterval(autoTimerRef.current);
@@ -133,7 +133,7 @@ export default function TVComponent() {
   }, [restartAutoTimer]);
 
   const handleInteraction = useCallback(() => {
-    restartAutoTimer(5000);
+    restartAutoTimer(3000);
   }, [restartAutoTimer]);
 
   const handleScreenClick = useCallback(() => {
