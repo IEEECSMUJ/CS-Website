@@ -46,7 +46,7 @@ const LEADERS: Leader[] = [
         eyebrow: "A Message From Our",
         title: ["General", "Secretary"],
         image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782010963088_pv6ol.avif",
-        quote: "Operational excellence and transparent communication form the backbone of our community. We strive to create seamless opportunities for growth, learning, and student empowerment.",
+        quote: "What we achieve as a community is a reflection of the people behind it. Together, we continue to learn, innovate, and create opportunities that inspire growth and meaningful impact.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
@@ -56,7 +56,7 @@ const LEADERS: Leader[] = [
         eyebrow: "A Message From Our",
         title: ["Managing", "Director"],
         image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782011183627_rhr4p8.avif",
-        quote: "Turning vision into execution is our goal. By managing resources and coordinating initiatives effectively, we ensure our members have the platform to build and excel.",
+        quote: "Turning ideas into action and opportunities into achievements through effective leadership, coordination, and execution. Together, we foster a community where creativity thrives, innovation flourishes, and excellence becomes a shared pursuit.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
@@ -86,7 +86,7 @@ const LEADERS: Leader[] = [
         eyebrow: "A Message From Our",
         title: ["Community", "Insights"],
         image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782011000004_fukov.avif",
-        quote: "Innovation is born from curiosity and code. We are committed to building robust technical foundations, encouraging hands-on experimentation, and mastering next-generation technologies.",
+        quote: "At IEEE CS MUJ, we believe in building relations that transform ideas into impactful tech innovations. By nurturing ourselves and growing at every step, we create opportunities to learn, lead, and inspire. Together, we build a community where we innovate, support one another, and most importantly, be happy while shaping the future.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     }
