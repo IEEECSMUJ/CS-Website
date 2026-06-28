@@ -1,0 +1,359 @@
+.tvWrap {
+  position: relative;
+  z-index: 10;
+  filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9)) drop-shadow(0 0 60px rgba(156,124,94,0.08));
+  animation: tvFloat 6s ease-in-out infinite;
+}
+
+@keyframes tvFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-10px); }
+}
+
+.tvCabinet {
+  background: linear-gradient(160deg, #3a2e22 0%, #2a2018 40%, #1e1710 100%);
+  border-radius: 28px 28px 24px 24px;
+  padding: 20px 24px 28px;
+  position: relative;
+  border: 2px solid #4a3828;
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,0.08),
+    inset 0 -4px 8px rgba(0,0,0,0.6),
+    0 8px 0 #1a1208,
+    0 12px 0 #140e06;
+}
+
+.tvCabinet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    92deg,
+    transparent 0px, transparent 18px,
+    rgba(0,0,0,0.06) 18px, rgba(0,0,0,0.06) 19px
+  );
+  pointer-events: none;
+}
+
+.tvBezel {
+  background: linear-gradient(145deg, #1a1410 0%, #0e0c08 100%);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.04),
+    inset 4px 4px 12px rgba(0,0,0,0.8),
+    inset -2px -2px 8px rgba(255,255,255,0.03);
+  position: relative;
+}
+
+.tvScreen {
+  width: 380px;
+  height: 285px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  background: #111;
+}
+
+.tvScreen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  box-shadow:
+    inset  8px  0  20px rgba(0,0,0,0.5),
+    inset -8px  0  20px rgba(0,0,0,0.5),
+    inset  0    8px 20px rgba(0,0,0,0.4),
+    inset  0  -8px 20px rgba(0,0,0,0.4);
+  pointer-events: none;
+  z-index: 30;
+}
+
+.screenImg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.screenOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(0,0,0,0.60) 0%,
+    rgba(0,0,0,0.20) 35%,
+    rgba(0,0,0,0.30) 65%,
+    rgba(0,0,0,0.75) 100%);
+  z-index: 2;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 3px,
+    rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 3;
+  border-radius: 8px;
+}
+
+.glitchLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.screenContent {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  font-family: var(--font-share-tech-mono), monospace;
+}
+
+.screenCh {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-family: var(--font-vt323), monospace;
+  font-size: 18px;
+  color: rgba(232,226,217,0.20);
+  letter-spacing: 0.1em;
+}
+
+.screenStat {
+  font-family: var(--font-vt323), monospace;
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(232,226,217,0.96);
+  text-shadow: 0 0 30px rgba(255,255,255,0.25), 0 2px 8px rgba(0,0,0,0.8);
+  letter-spacing: 0.04em;
+}
+
+.screenLabel {
+  font-family: var(--font-vt323), monospace;
+  font-size: 22px;
+  color: rgba(200,191,173,0.80);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+}
+
+.screenDesc {
+  font-family: var(--font-share-tech-mono), monospace;
+  font-size: 9.5px;
+  color: rgba(200,191,173,0.45);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.screenGlass {
+  position: absolute;
+  top: 6px; left: 8px;
+  width: 45%; height: 30%;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.07) 0%,
+    rgba(255,255,255,0.02) 50%,
+    transparent 100%
+  );
+  border-radius: 6px 6px 0 0;
+  pointer-events: none;
+  z-index: 7;
+}
+
+.phosphorGlow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 0;
+  transition: box-shadow 1.2s ease;
+}
+
+.switching .screenImg,
+.switching .screenContent,
+.switching .screenOverlay {
+  animation: crtSwitch 0.45s ease forwards;
+}
+
+@keyframes crtSwitch {
+  0%   { transform: scaleY(1);    filter: brightness(1.2); }
+  20%  { transform: scaleY(0.02); filter: brightness(3) blur(1px); }
+  55%  { transform: scaleY(0.02); filter: brightness(0.1); }
+  75%  { transform: scaleY(1.04); filter: brightness(1.4); }
+  90%  { transform: scaleY(0.97); filter: brightness(0.9); }
+  100% { transform: scaleY(1);    filter: brightness(1); }
+}
+
+@keyframes glitchShake {
+  0%   { transform: translateX(0)    skewX(0);      filter: none; }
+  15%  { transform: translateX(-5px) skewX(-1.5deg); filter: brightness(1.4) hue-rotate(15deg); }
+  30%  { transform: translateX(5px)  skewX(1.5deg);  filter: brightness(0.8) hue-rotate(-15deg); }
+  45%  { transform: translateX(-3px) skewX(0.5deg);  filter: brightness(1.2); }
+  60%  { transform: translateX(3px)  skewX(-0.5deg); filter: brightness(0.9); }
+  75%  { transform: translateX(-1px); }
+  100% { transform: translateX(0)    skewX(0);      filter: none; }
+}
+
+@keyframes glitchImg {
+  0%   { transform: translateX(0) scaleX(1);     filter: none; }
+  20%  { transform: translateX(8px) scaleX(1.01); filter: saturate(2.5) hue-rotate(20deg); }
+  40%  { transform: translateX(-8px) scaleX(0.99); filter: saturate(0.3) hue-rotate(-20deg); }
+  60%  { transform: translateX(4px);               filter: brightness(1.5); }
+  80%  { transform: translateX(-2px);               filter: brightness(0.8); }
+  100% { transform: translateX(0) scaleX(1);     filter: none; }
+}
+
+@keyframes glitchLines {
+  0%   { opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.glitching .screenContent {
+  animation: glitchShake 0.15s steps(2) forwards;
+}
+.glitching .screenImg {
+  animation: glitchImg 0.15s steps(2) forwards;
+}
+.glitching .glitchLayer {
+  animation: glitchLines 0.15s ease forwards;
+}
+
+.tvControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 4px;
+}
+
+.tvBrand {
+  font-family: var(--font-vt323), monospace;
+  font-size: 22px;
+  color: rgba(200,191,173,0.35);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.knobs {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.knob {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #5a4535, #2a1e14);
+  border: 2px solid #3a2a1c;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.1);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.knob::after {
+  content: '';
+  position: absolute;
+  top: 4px; left: 50%; transform: translateX(-50%);
+  width: 3px; height: 10px;
+  background: rgba(200,191,173,0.5);
+  border-radius: 2px;
+}
+
+.knob:hover  { transform: rotate(30deg); }
+.knob:active { transform: rotate(60deg); }
+.knob.chKnob { width: 38px; height: 38px; }
+.knob.chKnob::after { height: 12px; top: 5px; }
+
+.indicatorRow {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.led {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c4893a;
+  box-shadow: 0 0 6px #c4893a, 0 0 12px rgba(196,137,58,0.5);
+  animation: ledPulse 2s ease-in-out infinite;
+}
+
+@keyframes ledPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+.channelStrip {
+  display: flex;
+  gap: 8px;
+  margin-top: 22px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 590px;
+}
+
+.chBtn {
+  width: 44px;
+  height: 30px;
+  border: 1px solid rgba(200,191,173,0.15);
+  background: rgba(255,255,255,0.03);
+  border-radius: 4px;
+  color: rgba(200,191,173,0.5);
+  font-family: var(--font-vt323), monospace;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chBtn:hover {
+  border-color: rgba(200,191,173,0.4);
+  color: rgba(232,226,217,0.9);
+  transform: translateY(-1px);
+}
+
+.chBtn.active {
+  border-color: var(--ch-color, #c4893a);
+  color: #e8e2d9;
+  box-shadow: 0 0 10px var(--ch-color, #c4893a), inset 0 0 8px rgba(255,255,255,0.05);
+}
+
+.hint {
+  margin-top: 16px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+  font-family: var(--font-share-tech-mono), monospace;
+}
+
+@media (max-width: 640px) {
+  .tvScreen  { width: 320px; height: 240px; }
+  .tvCabinet { padding: 16px 18px 24px; }
+  .chBtn     { width: 36px; height: 26px; font-size: 14px; }
+  .screenStat  { font-size: 56px; }
+  .screenLabel { font-size: 20px; }
+}

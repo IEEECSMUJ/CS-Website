@@ -191,6 +191,12 @@ img {
   -webkit-text-fill-color: transparent;
 }
 
+.custom-scroll-text {
+  background: linear-gradient(to right, #ffffff, #f9ba1f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .eventsWord {
   display: inline-block;
 }

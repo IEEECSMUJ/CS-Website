@@ -14,8 +14,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 24px 32px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: rgba(244, 161, 25, 0.45);
   color: #ffffff;
+  position: relative;
+  z-index: 30;
 }
 
 .headerLeft {
@@ -28,14 +30,6 @@
   font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-}
-
-.yearBadge {
-  font-size: 0.85rem;
-  background: rgba(255,255,255,0.15);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-weight: 500;
 }
 
 .headerNav {
@@ -320,8 +314,8 @@
   max-width: 300px;
   padding: 6px 10px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(244,161,25,0.12), rgba(20,20,20,0.04));
-  border: 1px solid rgba(244,161,25,0.06);
+  background: linear-gradient(to right, #ffffff, #f9ba1f);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: transform 140ms ease, box-shadow 140ms ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
   cursor: pointer;
@@ -347,7 +341,7 @@
 }
 
 .pillTitle {
-  color: #fff;
+  color: #000000;
   font-weight: 700;
   font-size: 0.86rem;
   display: inline-block;
@@ -421,17 +415,6 @@
   color: #16a34a;
 }
 
-/* Section title */
-.sectionTitle {
-  text-align: center;
-  padding: 40px 20px 30px;
-  color: #facc15;
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .calendarContainer {
@@ -473,10 +456,6 @@
   .eventCard {
     max-width: 200px;
     padding: 10px 12px;
-  }
-
-  .sectionTitle {
-    font-size: 1.4rem;
   }
 }
 

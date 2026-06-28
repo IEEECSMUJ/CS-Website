@@ -153,7 +153,7 @@ export default function Home() {
           {/* ScrollVelocity (behind) */}
           <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
             <ScrollVelocity
-              texts={['WE ARE IEEE CS,', 'WE ARE IEEE CS']} 
+              texts={['WE ARE IEEE CS', 'WE ARE IEEE CS']} 
               velocity={35}
               className="custom-scroll-text"
               scrollContainerRef={heroPinRef}

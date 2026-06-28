@@ -25,12 +25,37 @@ export default function AboutPage() {
       <div id="about-page-wrapper" className="relative w-full z-[1]">
         <div id="about-scroll-canvas" className={styles.scrollCanvas}>
           <div className={styles.stickyHero}>
-            <h1
+            <div
               id="about-hero-title"
-              className={`font-bold tracking-tighter leading-none uppercase text-white ${styles.heroTitle}`}
+              className="flex flex-col items-center md:items-start"
             >
-              About Us
-            </h1>
+              <h1
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 900,
+                  background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  lineHeight: 1.15,
+                  paddingBottom: "0.15em",
+                  letterSpacing: "-0.03em",
+                  margin: 0,
+                }}
+                className={styles.heroTitle}
+              >
+                About Us
+              </h1>
+              <div
+                style={{
+                  width: "40px",
+                  height: "3px",
+                  backgroundColor: "#ffffff",
+                  boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+                  borderRadius: "999px",
+                  marginTop: "10px",
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -52,7 +77,17 @@ export default function AboutPage() {
         <div className={styles.navContainer}>
           <div className="text-white w-full lg:w-fit lg:ml-auto max-w-full md:max-w-[80%] lg:max-w-[55%] px-6 sm:px-0">
             <h2
-              className={`font-semibold tracking-tight leading-snug uppercase mb-8 ${styles.whoWeAreTitle}`}
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontWeight: 900,
+                background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                lineHeight: 1.15,
+                paddingBottom: "0.15em",
+                letterSpacing: "-0.03em",
+              }}
+              className={`uppercase mb-8 ${styles.whoWeAreTitle}`}
             >
               IEEE Computer Society
             </h2>

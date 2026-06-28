@@ -63,8 +63,8 @@ const COLLAGE_PHOTOS = [
   'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938613491_jcpn7n.svg',
   'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938637933_qzvdsl.svg',
   'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938619711_vjiu3q.svg',
-  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938626698_lp3yqr.svg',
   'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782228521495_a530ik.avif',
+  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938626698_lp3yqr.svg',
   'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938964231_adrg5b.avif',
 ]
 

@@ -312,13 +312,13 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR, 2024</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">WE ARE IEEE</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa04b14a1ca33c0b25_ln-home-horiz-1.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782560566447_akr6jp.avif"
               alt="Image 1"
               fill
-              className="z-0 translate-y-6 md:translate-y-0 object-contain object-right md:object-left"
+              className="z-0 translate-y-6 md:translate-y-0 object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
@@ -335,13 +335,13 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR, 2024</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">VENOM, 2026</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baab12220595c8223b3_ln-home-horiz-2.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782560022208_0qc8i9.avif"
               alt="Image 2"
               fill
-              className="object-contain object-left"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
@@ -358,13 +358,13 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">MIAMI GP, 2024</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">HACKERZ STREET 4.0, 2026</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302babcf12f0111d96322e_ln-home-horiz-3-p-500.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782561501835_is8g49.avif"
               alt="Image 3"
               fill
-              className="object-contain object-right md:object-left"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
               priority
             />
@@ -379,13 +379,13 @@ export default function HorizontalGallery() {
               className="w-full flex flex-col items-center md:items-end"
             >
               <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
-                <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn&apos;t matter where</p>
+                <p className="text-[#f9ba1f] text-[18px] md:text-[20px]">It doesn&apos;t matter where</p>
               </BoxReveal>
               <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
-                <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it&apos;s how you</p>
+                <p className="text-[#f9ba1f] text-[18px] md:text-[20px]">you start, it&apos;s how you</p>
               </BoxReveal>
               <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
-                <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">progress from there.</p>
+                <p className="text-[#f9ba1f] text-[18px] md:text-[20px]">progress from there.</p>
               </BoxReveal>
             </motion.div>
           </div>
@@ -404,13 +404,13 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">MONACO, 2023</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">HACKERZ STREET 4.0, 2026</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa798e2cc6e02ac38a_ln-home-horiz-4-p-500.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782565661341_zbz8t.webp"
               alt="Image 4"
               fill
-              className="object-contain object-left"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
@@ -427,19 +427,19 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BRITAIN, 2025</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">Social Outreach, 2025</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68da85d632bfefc552a0faac_Britain-25%20(1).webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782560271203_88tlqb.avif"
               alt="Image 5"
               fill
-              className="object-contain object-right md:object-left"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
           </div>
 
-          <div className="gallery-item-6 relative md:absolute md:left-[570px] md:bottom-[80px] w-[70%] md:w-[25vw] h-[40vh] md:h-[25vh] mr-auto">
+          <div className="gallery-item-6 relative md:absolute md:left-[670px] md:bottom-[80px] w-[70%] md:w-[25vw] h-[40vh] md:h-auto md:aspect-[16/9] mr-auto">
             <BoxReveal
               align="justify-start"
               className="-translate-y-6 md:translate-y-[-25px] md:absolute mb-2 z-20"
@@ -450,13 +450,13 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BATTERSEA, 2024</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">GENESIS 5.0, 2025</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa14a96f3cdd2f9a95_ln-home-horiz-6-p-500.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782571214276_nw4rqm.webp"
               alt="Image 6"
               fill
-              className="z-0 object-contain object-left"
+              className="z-0 object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
@@ -473,19 +473,19 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">FIA PRIZE GIVING, 2024</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">Night Perm</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302bab3ee6e26b1f434a7d_ln-home-horiz-7.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782560416402_819ju.jpeg"
               alt="Image 7"
               fill
-              className="object-contain object-right md:object-left"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
           </div>
 
-          <div className="gallery-item-8 relative md:absolute md:right-[200px] md:top-[150px] w-[85%] md:w-[30vw] h-[55vh] md:h-[48vh] mr-auto">
+          <div className="gallery-item-8 relative md:absolute md:right-[200px] md:top-[150px] w-[85%] md:w-[30vw] h-[55vh] md:h-auto md:aspect-[16/9] mr-auto">
             <BoxReveal
               align="justify-end"
               className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
@@ -496,39 +496,21 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BARCELONA, 2024</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">IEEE CS, 2025</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baaedf821dd2e3a7c74_ln-home-horiz-8-p-500.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782559824603_l6h16c.avif"
               alt="Image 8"
               fill
-              className="object-contain object-left"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />
           </div>
 
-          <div className="gallery-item-text-2 relative md:absolute md:right-[200px] md:bottom-[180px] w-full md:w-[30vw] py-10 md:py-0 text-center md:text-left flex flex-col items-center md:items-start">
-            <motion.div
-              variants={textContainerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-10% 0px" }}
-              className="w-full flex flex-col items-center md:items-start"
-            >
-              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
-                <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">Since I was 7 years old and had my first</p>
-              </BoxReveal>
-              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
-                <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I&apos;ve worked</p>
-              </BoxReveal>
-              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
-                <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">tirelessly to make that dream come true.</p>
-              </BoxReveal>
-            </motion.div>
-          </div>
+          
 
-          <div className="gallery-item-9 relative md:absolute md:right-[40px] md:bottom-[130px] w-full md:w-[10vw] h-[40vh] md:h-[25vh]">
+          <div className="gallery-item-9 relative md:absolute md:right-[40px] md:bottom-[130px] w-full md:w-[14vw] h-[40vh] md:h-[25vh]">
             <BoxReveal
               align="justify-start"
               className="md:translate-y-[-25px] md:absolute mb-2"
@@ -539,13 +521,13 @@ export default function HorizontalGallery() {
               duration={2.5}
               standalone={true}
             >
-              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BARCELONA, 2024</p>
+              <p className="text-[#f9ba1f] text-[13px] md:text-[10px]">IEEE CCs SUMMIT, 2025</p>
             </BoxReveal>
             <Image
-              src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302bab4f762cdbc5e93415_ln-home-horiz-10.webp"
+              src="https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782571207688_kxib06.webp"
               alt="Image 9"
               fill
-              className="object-contain object-left"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, 70vw"
               priority
             />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display, DM_Sans, Cormorant_Garamond } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, DM_Sans, Cormorant_Garamond, Share_Tech_Mono, VT323 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/ui/Footer";
@@ -33,6 +33,18 @@ const cormorant = Cormorant_Garamond({
   style: ["italic"],
 });
 
+const shareTechMono = Share_Tech_Mono({
+  variable: "--font-share-tech-mono",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
+const vt323 = VT323({
+  variable: "--font-vt323",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 export const metadata: Metadata = {
   title: "IEEE CS MUJ",
   description: "ieee cs muj website",
@@ -58,7 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${dmSans.variable} ${cormorant.variable} antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${dmSans.variable} ${cormorant.variable} ${shareTechMono.variable} ${vt323.variable} antialiased flex flex-col min-h-screen`}
         suppressHydrationWarning
       >
         <LoadingProvider>

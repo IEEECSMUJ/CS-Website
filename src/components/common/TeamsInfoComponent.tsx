@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
+import TVComponent from "./TVComponent";
 
 
 function easeOutExpo(x: number) {
@@ -51,7 +52,7 @@ function CountUp({ to, from = 0, delay = 0, duration = 1400, separator = "", sta
 
 const STATS = [
   { label: "Members",   value: 1500, ticks: 15, delay: 0    },
-  { label: "Events",    value: 20,   ticks: 8,  delay: 0.15 },
+  { label: "Events",    value: 30,   ticks: 8,  delay: 0.15 },
   { label: "Societies", value: 3,    ticks: 3,  delay: 0.3  },
   { label: "Mentors",   value: 10,   ticks: 5,  delay: 0.45 },
 ] as const;
@@ -255,17 +256,56 @@ export default function TeamsInfoComponent() {
         }
       `}</style>
 
-      <div className="flex flex-col items-center lg:items-start gap-6 lg:gap-10 w-full lg:w-[40vw] px-6 lg:px-0 mb-12 lg:mb-0">
-        <h1 className="font-bold text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left">IEEE CS MUJ</h1>
-        <h1 className="text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left lg:-translate-y-10">Since 2019</h1>
-        <img
-          className="h-[30vh] md:h-[40vh] lg:h-[50vh] object-contain"
-          src="/images/events/2.avif"
-          alt="img"
-        />
+      <div className="flex flex-col items-center lg:items-start w-full lg:w-[40vw] px-6 lg:px-0 mb-12 lg:mb-0">
+        <div className="flex flex-col items-center lg:items-start" style={{ marginBottom: "70px" }}>
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl text-center lg:text-left"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 900,
+              background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              lineHeight: 1.15,
+              paddingBottom: "0.15em",
+              letterSpacing: "-0.03em",
+              margin: 0,
+            }}
+          >
+            IEEE CS MUJ
+          </h1>
+          <h1
+            className="text-4xl md:text-5xl lg:text-6xl text-center lg:text-left"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 900,
+              background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              lineHeight: 1.15,
+              paddingBottom: "0.15em",
+              letterSpacing: "-0.03em",
+              margin: 0,
+              marginTop: "10px",
+            }}
+          >
+            Since 2019
+          </h1>
+          <div
+            style={{
+              width: "40px",
+              height: "3px",
+              backgroundColor: "#ffffff",
+              boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+              borderRadius: "999px",
+              marginTop: "15px",
+            }}
+          />
+        </div>
+        <TVComponent />
       </div>
 
-      <div className="relative w-full lg:w-[50vw] px-4 lg:px-0">
+      <div className="relative w-full lg:w-[50vw] px-4 lg:px-0" style={{ marginTop: "65px" }}>
         <ParticleCanvas />
         <div className="relative z-[1] w-full grid grid-cols-2 grid-rows-2">
           {STATS.map(({ label, value, ticks, delay }, index) => (

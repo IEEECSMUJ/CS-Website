@@ -11,21 +11,21 @@ import {
 import { useMediaQuery } from 'react-responsive';
 
 const IMAGES = [
-    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
-    'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=80',
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',
-    'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80',
-    'https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?w=600&q=80',
-    'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=600&q=80',
-    'https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?w=600&q=80',
-    'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&q=90',
-    'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=600&q=80',
-    'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=600&q=80',
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
-    'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=600&q=80',
-    'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=80',
-    'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600&q=80',
-    'https://images.unsplash.com/photo-1485470733090-0aae1788d5af?w=600&q=80',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782560890144_eiggr.jpeg',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562282146_spph3r.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562529818_eoed.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782659857657_tzsw4o.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562551042_2702i.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562562411_f2i9c.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782562302512_z4c2gm.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782564214909_0h7cc2.webp',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782563020146_ic2d8u.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782564444689_w96wiw.webp',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782626827226_96d99l.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782628087084_7yu295.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782626676553_vp5eo.webp',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782659869512_du1u.avif',
+    'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782626687798_61ilal.webp',
 ];
 
 interface CellProps {
@@ -82,12 +82,12 @@ const GridCell = memo(function GridCell({
         return (
             <motion.div
                 layoutId={`img-${index}`}
-                className="relative w-full aspect-square overflow-hidden cursor-pointer"
+                className="relative w-full aspect-[3/2] overflow-hidden cursor-pointer"
                 onClick={gridComplete ? onClick : undefined}
                 style={{
                     scale: heroScale,
                     borderRadius: heroBorderRadius,
-                    aspectRatio: '1/1',
+                    aspectRatio: '3/2',
                     zIndex: isActive ? 50 : 10,
                     willChange: 'transform',
                 }}
@@ -109,7 +109,7 @@ const GridCell = memo(function GridCell({
     return (
         <motion.div
             layoutId={`img-${index}`}
-            className="relative w-full aspect-square overflow-hidden cursor-pointer"
+            className="relative w-full aspect-[3/2] overflow-hidden cursor-pointer"
             onClick={gridComplete ? onClick : undefined}
             style={{
                 y: siblingY,
@@ -117,6 +117,7 @@ const GridCell = memo(function GridCell({
                 scale: siblingScale,
                 borderRadius: 4,
                 zIndex: isActive ? 50 : 1,
+                aspectRatio: '3/2',
             }}
             animate={{
                 filter: dimFilter,
@@ -213,7 +214,7 @@ export default function ScrollGrid() {
                             key={`zoomed-${activeIndex}`}
                             layoutId={`img-${activeIndex}`}
                             className="absolute z-40 overflow-hidden cursor-pointer"
-                            style={{ borderRadius: 8, width: 'min(80vw, 560px)', aspectRatio: '1/1' }}
+                            style={{ borderRadius: 8, width: 'min(90vw, 840px)', aspectRatio: '3/2' }}
                             initial={false}
                             transition={{ type: 'spring', stiffness: 260, damping: 28 }}
                             onClick={() => setActiveIndex(null)}
@@ -244,7 +245,7 @@ export default function ScrollGrid() {
                             gridTemplateColumns: `repeat(${cols}, 1fr)`,
                             gridAutoRows: 'auto',
                             gap: 'clamp(4px, 1.2vw, 16px)',
-                            width: isMobile ? 'min(92vw, 400px)' : 'min(96vw, 960px)',
+                            width: isMobile ? 'min(92vw, 480px)' : 'min(96vw, 1350px)',
                             height: 'max-content',
                             alignContent: 'center',
                             zIndex: 20,
@@ -266,7 +267,7 @@ export default function ScrollGrid() {
                     </div>
                 </motion.div>
             </div>
-            <br /><br />
+            <br />
         </div>
         
     );

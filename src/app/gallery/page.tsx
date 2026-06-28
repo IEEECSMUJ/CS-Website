@@ -15,9 +15,35 @@ export default function Gallery() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    // Start muted to ensure autoplay is allowed by the browser
     video.muted = true;
+    video.loop = false;
     video.load();
-    video.play().catch(() => {});
+    video.play().catch((err) => {
+      console.log("Autoplay blocked or failed:", err);
+    });
+
+    // Unmute upon first user interaction
+    const unmute = () => {
+      video.muted = false;
+      video.play().catch(() => {});
+      cleanup();
+    };
+
+    const cleanup = () => {
+      document.removeEventListener("click", unmute);
+      document.removeEventListener("touchstart", unmute);
+      document.removeEventListener("keydown", unmute);
+    };
+
+    document.addEventListener("click", unmute);
+    document.addEventListener("touchstart", unmute);
+    document.addEventListener("keydown", unmute);
+
+    return () => {
+      cleanup();
+    };
   }, []);
 
   return (<>
@@ -59,13 +85,16 @@ export default function Gallery() {
               style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
             >
               <h1
-                className="text-[48px] sm:text-[70px] md:text-[120px] lg:text-[150px] leading-[1] text-white uppercase text-center"
+                className="text-[48px] sm:text-[70px] md:text-[120px] lg:text-[150px] leading-[1] uppercase text-center"
                 style={{
                   fontFamily: "var(--font-cormorant), serif",
                   fontWeight: 700,
                   fontStyle: 'italic',
                   letterSpacing: '0.05em',
                   textShadow: '0 4px 60px rgba(0,0,0,0.6)',
+                  background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
                 Gallery

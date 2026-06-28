@@ -10,7 +10,8 @@ import {
   Mail,
   Phone,
   ExternalLink,
-  Heart
+  Heart,
+  User
 } from 'lucide-react';
 import styles from './Footer.module.css';
 
@@ -227,13 +228,21 @@ export default function Footer() {
                   <span style={{ color: '#f97316' }}>&gt;</span> Contact
                 </h4>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
-                  <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
-                    <MapPin style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', marginTop: '0.15rem', flexShrink: 0 }} />
-                    <span style={{ color: '#9ca3af', fontSize: '0.875rem', lineHeight: '1.6' }}>
-                      Manipal University Jaipur,<br />
-                      Dehmi Kalan, Jaipur-Ajmer Expressway,<br />
-                      Rajasthan 303007
+                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                    <User style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', flexShrink: 0 }} />
+                    <span style={{ color: '#9ca3af', fontSize: '0.875rem' }}>
+                      Tanmoy Mandal (Chairperson)
                     </span>
+                  </li>
+                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                    <Phone style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', flexShrink: 0 }} />
+                    <a
+                      href="tel:+919871340076"
+                      className="hover:text-orange-500 transition-colors"
+                      style={{ color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem' }}
+                    >
+                      +91 98713 40076
+                    </a>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                     <Mail style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', flexShrink: 0 }} />
@@ -245,15 +254,13 @@ export default function Footer() {
                       contact@ieeecsmuj.com
                     </a>
                   </li>
-                  <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                    <Phone style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', flexShrink: 0 }} />
-                    <a
-                      href="tel:+919871340076"
-                      className="hover:text-orange-500 transition-colors"
-                      style={{ color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem' }}
-                    >
-                      +91 98713 40076
-                    </a>
+                  <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.65rem' }}>
+                    <MapPin style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', marginTop: '0.15rem', flexShrink: 0 }} />
+                    <span style={{ color: '#9ca3af', fontSize: '0.875rem', lineHeight: '1.6' }}>
+                      Manipal University Jaipur,<br />
+                      Dehmi Kalan, Jaipur-Ajmer Expressway,
+                      Rajasthan 303007
+                    </span>
                   </li>
                 </ul>
               </div>
