@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
+import TVComponent from "./TVComponent";
 
 
 function easeOutExpo(x: number) {
@@ -301,12 +302,7 @@ export default function TeamsInfoComponent() {
             }}
           />
         </div>
-        <img
-          className="h-[30vh] md:h-[40vh] lg:h-[50vh] object-contain"
-          style={{ marginTop: "-55px" }}
-          src="/images/events/website poster.png"
-          alt="img"
-        />
+        <TVComponent />
       </div>
 
       <div className="relative w-full lg:w-[50vw] px-4 lg:px-0" style={{ marginTop: "65px" }}>
