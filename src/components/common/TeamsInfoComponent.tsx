@@ -67,7 +67,11 @@ function ParticleCanvas() {
     const ctx = canvas.getContext("2d")!;
     let W = 0, H = 0, raf = 0;
 
-    const pts = Array.from({ length: 60 }, () => ({
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 18 : 60;
+    const maxDistance = isMobile ? 80 : 120;
+
+    const pts = Array.from({ length: particleCount }, () => ({
       x: Math.random(),
       y: Math.random(),
       vx: (Math.random() - 0.5) * 0.00015,
@@ -99,11 +103,11 @@ function ParticleCanvas() {
           const dx = (pts[i].x - pts[j].x) * W;
           const dy = (pts[i].y - pts[j].y) * H;
           const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 120) {
+          if (d < maxDistance) {
             ctx.beginPath();
             ctx.moveTo(pts[i].x * W, pts[i].y * H);
             ctx.lineTo(pts[j].x * W, pts[j].y * H);
-            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - d / 120)})`;
+            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - d / maxDistance)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
