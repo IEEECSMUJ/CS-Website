@@ -46,6 +46,9 @@ export default function TopographicBackground({
       );
     };
 
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const activeLineCount = isMobile ? 4 : lineCount;
+
     const W = () => canvas.offsetWidth;
     const H = () => canvas.offsetHeight;
 
@@ -88,8 +91,8 @@ export default function TopographicBackground({
       const minV = -0.85;
       const maxV = 0.85;
 
-      for (let c = 0; c < lineCount; c++) {
-        const threshold = minV + ((maxV - minV) * c) / (lineCount - 1);
+      for (let c = 0; c < activeLineCount; c++) {
+        const threshold = minV + ((maxV - minV) * c) / (activeLineCount - 1);
 
         ctx.beginPath();
 

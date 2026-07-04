@@ -151,13 +151,25 @@ export default function Navbar() {
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
-        const isScrolled = window.scrollY > 60;
+        const scrollY = window.scrollY;
+        const isScrolled = scrollY > 60;
         setScrolled((prev) => (prev === isScrolled ? prev : isScrolled));
         updateContrast();
+        
+        if (logoRef.current) {
+          const opacity = Math.max(0, 1 - scrollY / 150);
+          logoRef.current.style.opacity = String(opacity);
+          logoRef.current.style.pointerEvents = opacity === 0 ? "none" : "auto";
+        }
       });
     };
 
     updateContrast();
+    if (logoRef.current) {
+      const initialOpacity = Math.max(0, 1 - window.scrollY / 150);
+      logoRef.current.style.opacity = String(initialOpacity);
+      logoRef.current.style.pointerEvents = initialOpacity === 0 ? "none" : "auto";
+    }
     const timer = setTimeout(updateContrast, 100);
 
     window.addEventListener("scroll", handleScroll, { passive: true });

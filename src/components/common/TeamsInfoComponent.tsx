@@ -22,6 +22,15 @@ function CountUp({ to, from = 0, delay = 0, duration = 1400, separator = "", sta
 
   useEffect(() => {
     if (!start) return;
+
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    if (isMobile) {
+      if (ref.current) {
+        ref.current.textContent = separator ? to.toLocaleString("en-US") : String(to);
+      }
+      return;
+    }
+
     if (ref.current) ref.current.textContent = String(from);
 
     let rafId = 0;
@@ -67,7 +76,11 @@ function ParticleCanvas() {
     const ctx = canvas.getContext("2d")!;
     let W = 0, H = 0, raf = 0;
 
-    const pts = Array.from({ length: 60 }, () => ({
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const particleCount = isMobile ? 18 : 60;
+    const maxDistance = isMobile ? 80 : 120;
+
+    const pts = Array.from({ length: particleCount }, () => ({
       x: Math.random(),
       y: Math.random(),
       vx: (Math.random() - 0.5) * 0.00015,
@@ -79,15 +92,23 @@ function ParticleCanvas() {
     function resize() {
       W = canvas!.width = canvas!.offsetWidth;
       H = canvas!.height = canvas!.offsetHeight;
+      if (isMobile) {
+        draw();
+      }
     }
 
     function draw() {
-      if (!W) { raf = requestAnimationFrame(draw); return; }
+      if (!W) { 
+        if (!isMobile) raf = requestAnimationFrame(draw); 
+        return; 
+      }
       ctx.clearRect(0, 0, W, H);
 
       pts.forEach((p) => {
-        p.x = (p.x + p.vx + 1) % 1;
-        p.y = (p.y + p.vy + 1) % 1;
+        if (!isMobile) {
+          p.x = (p.x + p.vx + 1) % 1;
+          p.y = (p.y + p.vy + 1) % 1;
+        }
         ctx.beginPath();
         ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${p.o})`;
@@ -99,17 +120,20 @@ function ParticleCanvas() {
           const dx = (pts[i].x - pts[j].x) * W;
           const dy = (pts[i].y - pts[j].y) * H;
           const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 120) {
+          if (d < maxDistance) {
             ctx.beginPath();
             ctx.moveTo(pts[i].x * W, pts[i].y * H);
             ctx.lineTo(pts[j].x * W, pts[j].y * H);
-            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - d / 120)})`;
+            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - d / maxDistance)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       }
-      raf = requestAnimationFrame(draw);
+      
+      if (!isMobile) {
+        raf = requestAnimationFrame(draw);
+      }
     }
 
     resize();
@@ -117,7 +141,7 @@ function ParticleCanvas() {
     raf = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(raf);
+      if (!isMobile) cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
   }, []);
@@ -152,6 +176,19 @@ function StatCell({
 
   useEffect(() => {
     if (!isInView) return;
+
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    if (isMobile) {
+      if (revealRef.current) {
+        revealRef.current.style.transform = "scaleX(0)";
+        revealRef.current.style.display = "none";
+      }
+      tickRefs.current.forEach((t) => {
+        if (t) t.style.background = "#ffffff";
+      });
+      return;
+    }
+
     const revealTimeout = setTimeout(() => {
       if (revealRef.current) {
         revealRef.current.style.transform = "scaleX(0)";
@@ -185,7 +222,7 @@ function StatCell({
   }, [delay, ticks, isInView]);
 
   return (
-    <div ref={containerRef} className={`relative border-b border-white/[0.06] border-r p-2 md:p-10 group transition-colors duration-300 hover:bg-white/[0.02] [&:nth-child(2)]:border-r-0 [&:nth-child(4)]:border-r-0 md:[&:nth-child(2)]:border-r-0 md:[&:nth-child(4)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 md:[&:nth-child(3)]:border-b-0 md:[&:nth-child(4)]:border-b-0 flex flex-col ${isRight ? 'items-end text-right pr-4 md:items-start md:text-left md:pr-10' : 'items-start text-left pl-4 md:pl-10'}`}>
+    <div ref={containerRef} className={`relative border-b border-white/[0.06] border-r p-2 md:p-10 group transition-colors duration-300 hover:bg-white/[0.02] [&:nth-child(2)]:border-r-0 [&:nth-child(4)]:border-r-0 md:[&:nth-child(2)]:border-r-0 md:[&:nth-child(4)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 md:[&:nth-child(3)]:border-b-0 md:[&:nth-child(4)]:border-b-0 flex flex-col items-center text-center md:items-start md:text-left px-4 md:px-10`}>
 
       <div
         ref={revealRef}
@@ -195,7 +232,7 @@ function StatCell({
       <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
         <div
           className="absolute bottom-[-16px] right-[-8px] font-black text-white/[0.025] group-hover:text-white/[0.05] transition-colors duration-300 select-none leading-none tracking-[-8px]"
-          style={{ fontSize: "clamp(100px, 22vw, 200px)" }}
+          style={{ fontSize: "clamp(80px, 20vw, 200px)" }}
         >
           {value}
         </div>
@@ -208,8 +245,8 @@ function StatCell({
       </p>
       <div className="relative z-[1] flex items-baseline gap-1 leading-none">
         <div
-          className="font-black text-white tracking-[-4px] leading-none tabular-nums"
-          style={{ fontSize: "clamp(72px, 14vw, 120px)" }}
+          className="font-black text-white tracking-[-2px] md:tracking-[-4px] leading-none tabular-nums"
+          style={{ fontSize: "clamp(44px, 9vw, 120px)" }}
         >
           <CountUp
             to={value}
@@ -222,13 +259,13 @@ function StatCell({
         </div>
         <span
           className="font-black text-white/40 leading-none"
-          style={{ fontSize: "clamp(40px, 7vw, 60px)", alignSelf: "flex-start", marginTop: "8px" }}
+          style={{ fontSize: "clamp(24px, 5vw, 60px)", alignSelf: "flex-start", marginTop: "clamp(4px, 1vw, 8px)" }}
         >
           +
         </span>
       </div>
 
-      <div className={`relative z-[1] flex flex-wrap gap-1.5 mt-5 ${isRight ? 'justify-end md:justify-start' : 'justify-start'}`}>
+      <div className="relative z-[1] flex flex-wrap gap-1.5 mt-5 justify-center md:justify-start">
         {Array.from({ length: ticks }).map((_, i) => (
           <div
             key={i}
