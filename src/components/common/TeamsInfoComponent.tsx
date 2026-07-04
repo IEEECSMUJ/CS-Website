@@ -185,7 +185,7 @@ function StatCell({
   }, [delay, ticks, isInView]);
 
   return (
-    <div ref={containerRef} className={`relative border-b border-white/[0.06] border-r p-2 md:p-10 group transition-colors duration-300 hover:bg-white/[0.02] [&:nth-child(2)]:border-r-0 [&:nth-child(4)]:border-r-0 md:[&:nth-child(2)]:border-r-0 md:[&:nth-child(4)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 md:[&:nth-child(3)]:border-b-0 md:[&:nth-child(4)]:border-b-0 flex flex-col ${isRight ? 'items-end text-right pr-4 md:items-start md:text-left md:pr-10' : 'items-start text-left pl-4 md:pl-10'}`}>
+    <div ref={containerRef} className={`relative border-b border-white/[0.06] border-r p-2 md:p-10 group transition-colors duration-300 hover:bg-white/[0.02] [&:nth-child(2)]:border-r-0 [&:nth-child(4)]:border-r-0 md:[&:nth-child(2)]:border-r-0 md:[&:nth-child(4)]:border-r-0 [&:nth-child(3)]:border-b-0 [&:nth-child(4)]:border-b-0 md:[&:nth-child(3)]:border-b-0 md:[&:nth-child(4)]:border-b-0 flex flex-col items-center text-center md:items-start md:text-left px-4 md:px-10`}>
 
       <div
         ref={revealRef}
@@ -228,7 +228,7 @@ function StatCell({
         </span>
       </div>
 
-      <div className={`relative z-[1] flex flex-wrap gap-1.5 mt-5 ${isRight ? 'justify-end md:justify-start' : 'justify-start'}`}>
+      <div className="relative z-[1] flex flex-wrap gap-1.5 mt-5 justify-center md:justify-start">
         {Array.from({ length: ticks }).map((_, i) => (
           <div
             key={i}
