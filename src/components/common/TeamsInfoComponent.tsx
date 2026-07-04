@@ -22,6 +22,15 @@ function CountUp({ to, from = 0, delay = 0, duration = 1400, separator = "", sta
 
   useEffect(() => {
     if (!start) return;
+
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    if (isMobile) {
+      if (ref.current) {
+        ref.current.textContent = separator ? to.toLocaleString("en-US") : String(to);
+      }
+      return;
+    }
+
     if (ref.current) ref.current.textContent = String(from);
 
     let rafId = 0;
@@ -67,7 +76,11 @@ function ParticleCanvas() {
     const ctx = canvas.getContext("2d")!;
     let W = 0, H = 0, raf = 0;
 
-    const pts = Array.from({ length: 60 }, () => ({
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const particleCount = isMobile ? 18 : 60;
+    const maxDistance = isMobile ? 80 : 120;
+
+    const pts = Array.from({ length: particleCount }, () => ({
       x: Math.random(),
       y: Math.random(),
       vx: (Math.random() - 0.5) * 0.00015,
@@ -79,15 +92,23 @@ function ParticleCanvas() {
     function resize() {
       W = canvas!.width = canvas!.offsetWidth;
       H = canvas!.height = canvas!.offsetHeight;
+      if (isMobile) {
+        draw();
+      }
     }
 
     function draw() {
-      if (!W) { raf = requestAnimationFrame(draw); return; }
+      if (!W) { 
+        if (!isMobile) raf = requestAnimationFrame(draw); 
+        return; 
+      }
       ctx.clearRect(0, 0, W, H);
 
       pts.forEach((p) => {
-        p.x = (p.x + p.vx + 1) % 1;
-        p.y = (p.y + p.vy + 1) % 1;
+        if (!isMobile) {
+          p.x = (p.x + p.vx + 1) % 1;
+          p.y = (p.y + p.vy + 1) % 1;
+        }
         ctx.beginPath();
         ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${p.o})`;
@@ -99,17 +120,20 @@ function ParticleCanvas() {
           const dx = (pts[i].x - pts[j].x) * W;
           const dy = (pts[i].y - pts[j].y) * H;
           const d = Math.sqrt(dx * dx + dy * dy);
-          if (d < 120) {
+          if (d < maxDistance) {
             ctx.beginPath();
             ctx.moveTo(pts[i].x * W, pts[i].y * H);
             ctx.lineTo(pts[j].x * W, pts[j].y * H);
-            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - d / 120)})`;
+            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - d / maxDistance)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       }
-      raf = requestAnimationFrame(draw);
+      
+      if (!isMobile) {
+        raf = requestAnimationFrame(draw);
+      }
     }
 
     resize();
@@ -117,7 +141,7 @@ function ParticleCanvas() {
     raf = requestAnimationFrame(draw);
 
     return () => {
-      cancelAnimationFrame(raf);
+      if (!isMobile) cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
     };
   }, []);
@@ -152,6 +176,19 @@ function StatCell({
 
   useEffect(() => {
     if (!isInView) return;
+
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    if (isMobile) {
+      if (revealRef.current) {
+        revealRef.current.style.transform = "scaleX(0)";
+        revealRef.current.style.display = "none";
+      }
+      tickRefs.current.forEach((t) => {
+        if (t) t.style.background = "#ffffff";
+      });
+      return;
+    }
+
     const revealTimeout = setTimeout(() => {
       if (revealRef.current) {
         revealRef.current.style.transform = "scaleX(0)";

@@ -66,7 +66,7 @@ export default function Home() {
           opacity: 0,
           scale: 1.03,
           backdropFilter: "blur(0px)",
-          WebkitBackdropFilter: "blur(0px)",
+          webkitBackdropFilter: "blur(0px)",
           duration: 0.65,
           ease: "power3.inOut",
           onComplete: () => {
@@ -151,7 +151,7 @@ export default function Home() {
           }}
         >
           {/* ScrollVelocity (behind) */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute inset-x-0 top-[60%] z-0 pointer-events-none md:inset-0 md:flex md:items-center md:justify-center">
             <ScrollVelocity
               texts={['WE ARE IEEE CS', 'WE ARE IEEE CS']} 
               velocity={35}
@@ -161,7 +161,7 @@ export default function Home() {
           </div>
           
         {/* HeroImageSequence (foreground) */}
-          <div className="relative z-10 w-full h-full">
+          <div className="relative z-10 w-full h-full -top-16 md:top-0">
             <HeroImageSequence scrollContainerRef={heroPinRef} />
           </div>
         </div>
