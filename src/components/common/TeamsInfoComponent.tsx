@@ -195,7 +195,7 @@ function StatCell({
       <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
         <div
           className="absolute bottom-[-16px] right-[-8px] font-black text-white/[0.025] group-hover:text-white/[0.05] transition-colors duration-300 select-none leading-none tracking-[-8px]"
-          style={{ fontSize: "clamp(100px, 22vw, 200px)" }}
+          style={{ fontSize: "clamp(80px, 20vw, 200px)" }}
         >
           {value}
         </div>
@@ -208,8 +208,8 @@ function StatCell({
       </p>
       <div className="relative z-[1] flex items-baseline gap-1 leading-none">
         <div
-          className="font-black text-white tracking-[-4px] leading-none tabular-nums"
-          style={{ fontSize: "clamp(72px, 14vw, 120px)" }}
+          className="font-black text-white tracking-[-2px] md:tracking-[-4px] leading-none tabular-nums"
+          style={{ fontSize: "clamp(44px, 9vw, 120px)" }}
         >
           <CountUp
             to={value}
@@ -222,7 +222,7 @@ function StatCell({
         </div>
         <span
           className="font-black text-white/40 leading-none"
-          style={{ fontSize: "clamp(40px, 7vw, 60px)", alignSelf: "flex-start", marginTop: "8px" }}
+          style={{ fontSize: "clamp(24px, 5vw, 60px)", alignSelf: "flex-start", marginTop: "clamp(4px, 1vw, 8px)" }}
         >
           +
         </span>
