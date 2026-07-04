@@ -292,3 +292,28 @@ img {
   -ms-overflow-style: none !important;  /* IE and Edge */
   scrollbar-width: none !important;  /* Firefox */
 }
+
+/* ── Mobile and Touch responsiveness overrides ── */
+@media (max-width: 1024px) {
+  /* Prevent sticky panels cutting off content on mobile/tablets */
+  .sticky-panel-mobile {
+    position: relative !important;
+  }
+
+  /* Make social links visible on mobile/touch screens */
+  .team-card .social-links-container {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+
+  /* Ensure images are grayscale by default and color on hover/tap on mobile */
+  .team-card img {
+    filter: grayscale(1) !important;
+    transition: filter 0.5s ease !important;
+  }
+
+  .team-card:hover img, .team-card:active img {
+    filter: grayscale(0) !important;
+  }
+}
+

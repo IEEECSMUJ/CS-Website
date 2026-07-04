@@ -24,6 +24,7 @@ export default function ECCard({ member }: { member: TeamMember }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div
+      className="team-card"
       style={{ position:'relative', width:'100%', maxWidth:'220px', height:'auto', aspectRatio:'220 / 290', overflow:'hidden', flexShrink:0, boxShadow: hovered ? '0 24px 48px rgba(0,0,0,0.7)' : '0 8px 24px rgba(0,0,0,0.5)', cursor:'pointer', transition:'box-shadow 0.4s ease' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -35,7 +36,7 @@ export default function ECCard({ member }: { member: TeamMember }) {
       />
       <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)' }} />
       {/* Social icons */}
-      <div style={{ position:'absolute', top:'12px', right:'12px', display:'flex', flexDirection:'column', gap:'8px', opacity: hovered ? 1 : 0, transform: hovered ? 'translateX(0)' : 'translateX(12px)', transition:'opacity 0.3s ease, transform 0.3s ease' }}>
+      <div className="social-links-container" style={{ position:'absolute', top:'12px', right:'12px', display:'flex', flexDirection:'column', gap:'8px', opacity: hovered ? 1 : 0, transform: hovered ? 'translateX(0)' : 'translateX(12px)', transition:'opacity 0.3s ease, transform 0.3s ease' }}>
         {member.linkedin && (
           <a href={member.linkedin} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{ width:'34px', height:'34px', borderRadius:'50%', background:'rgba(255,255,255,0.15)', backdropFilter:'blur(8px)', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', border:'1px solid rgba(255,255,255,0.2)', textDecoration:'none' }}>
             <LinkedInIcon />
