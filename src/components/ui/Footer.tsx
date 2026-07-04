@@ -231,17 +231,17 @@ export default function Footer() {
                   <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                     <User style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', flexShrink: 0 }} />
                     <span style={{ color: '#9ca3af', fontSize: '0.875rem' }}>
-                      Tanmoy Mandal (Chairperson)
+                      Tanmoy Mandal Chairperson
                     </span>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                     <Phone style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', flexShrink: 0 }} />
                     <a
-                      href="tel:+919871340076"
+                      href="tel:+918340157213"
                       className="hover:text-orange-500 transition-colors"
                       style={{ color: '#9ca3af', textDecoration: 'none', fontSize: '0.875rem' }}
                     >
-                      +91 98713 40076
+                      +91 83401 57213
                     </a>
                   </li>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
