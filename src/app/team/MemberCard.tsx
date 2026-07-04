@@ -28,6 +28,7 @@ export default function MemberCard({ member }: { member: TeamMember }) {
 
   return (
     <div
+      className="team-card"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -60,7 +61,7 @@ export default function MemberCard({ member }: { member: TeamMember }) {
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)" }} />
 
       {/* Social icons — appear on hover */}
-      <div style={{
+      <div className="social-links-container" style={{
         position: "absolute", top: "12px", right: "12px",
         display: "flex", flexDirection: "column", gap: "8px",
         opacity: hovered ? 1 : 0,

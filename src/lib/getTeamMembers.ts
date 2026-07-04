@@ -51,5 +51,5 @@ export const getTeamMembers = unstable_cache(
     }
   },
   ['team-members'],
-  { revalidate: 3600 } // Revalidate every hour, or manually via webhook
+  { revalidate: 3600, tags: ['team'] } // Revalidate every hour, or manually via webhook
 );
