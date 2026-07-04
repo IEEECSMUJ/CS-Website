@@ -49,7 +49,7 @@ export const getEvents = unstable_cache(
     }
   },
   ['events-list'],
-  { revalidate: 3600 } // Cache for 1 hour, revalidated manually
+  { revalidate: 3600, tags: ['events'] } // Cache for 1 hour, revalidated manually
 );
 
 export async function getEventById(id: string): Promise<EventItem | null> {

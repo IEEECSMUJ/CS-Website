@@ -1,4 +1,4 @@
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -13,8 +13,11 @@ export async function POST(request: NextRequest) {
   const tag: string = body.tag ?? 'team';
 
   if (tag === 'team') {
+    revalidateTag('team', 'max');
     revalidatePath('/team', 'page');
   } else if (tag === 'events') {
+    revalidateTag('events', 'max');
+    revalidatePath('/events', 'page');
     revalidatePath('/events', 'layout');
   }
 
