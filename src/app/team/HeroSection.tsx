@@ -199,7 +199,7 @@ export default function HeroSection({ ecMembers }: { ecMembers: TeamMember[] }) 
 
   return (
     <div ref={heroRef} className="relative w-screen overflow-x-hidden text-white bg-black">
-      <div ref={ourStoryWrapper} className="relative min-h-[140vh] z-10 bg-black">
+      <div ref={ourStoryWrapper} className="relative lg:min-h-[140vh] min-h-0 h-auto z-10 bg-black">
 
         {/* EC section */}
         <div

@@ -295,9 +295,10 @@ img {
 
 /* ── Mobile and Touch responsiveness overrides ── */
 @media (max-width: 1024px) {
-  /* Prevent sticky panels cutting off content on mobile/tablets */
+  /* Prevent sticky panels cutting off content on mobile/tablets and reduce top padding */
   .sticky-panel-mobile {
     position: relative !important;
+    padding-top: 40px !important;
   }
 
   /* Make social links visible on mobile/touch screens */
@@ -314,6 +315,11 @@ img {
 
   .team-card:hover img, .team-card:active img {
     filter: grayscale(0) !important;
+  }
+
+  /* Reduce bottom padding of EC section to minimize spacing to the next section */
+  #hero-ec-content {
+    padding-bottom: 40px !important;
   }
 }
 
