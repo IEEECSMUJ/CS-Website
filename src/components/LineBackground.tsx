@@ -28,9 +28,23 @@ export default function TopographicBackground({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const isMobile = window.innerWidth < 768;
-    const activeLineCount = isMobile ? Math.min(6, lineCount) : lineCount;
-    const isAnimated = isMobile ? false : animated;
+    const resize = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    const noise = (x: number, y: number, t: number): number => {
+      return (
+        Math.sin(x * 0.8 + t * 0.12) * Math.cos(y * 0.6 + t * 0.09) * 0.4 +
+        Math.sin(x * 0.4 - y * 0.5 + t * 0.07) * 0.3 +
+        Math.cos(x * 1.1 + y * 0.9 - t * 0.11) * 0.2 +
+        Math.sin(x * 0.25 + y * 0.3 + t * 0.05) * 0.1
+      );
+    };
 
     const W = () => canvas.offsetWidth;
     const H = () => canvas.offsetHeight;
@@ -74,8 +88,8 @@ export default function TopographicBackground({
       const minV = -0.85;
       const maxV = 0.85;
 
-      for (let c = 0; c < activeLineCount; c++) {
-        const threshold = minV + ((maxV - minV) * c) / (activeLineCount - 1);
+      for (let c = 0; c < lineCount; c++) {
+        const threshold = minV + ((maxV - minV) * c) / (lineCount - 1);
 
         ctx.beginPath();
 
@@ -138,46 +152,17 @@ export default function TopographicBackground({
       }
     };
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-      if (!isAnimated) {
-        drawContours(timeRef.current);
-      }
-    };
-
-    resize();
-    window.addEventListener("resize", resize);
-
-    const noise = (x: number, y: number, t: number): number => {
-      return (
-        Math.sin(x * 0.8 + t * 0.12) * Math.cos(y * 0.6 + t * 0.09) * 0.4 +
-        Math.sin(x * 0.4 - y * 0.5 + t * 0.07) * 0.3 +
-        Math.cos(x * 1.1 + y * 0.9 - t * 0.11) * 0.2 +
-        Math.sin(x * 0.25 + y * 0.3 + t * 0.05) * 0.1
-      );
-    };
-
     const animate = () => {
-      timeRef.current += isAnimated ? 0.04 : 0;
+      timeRef.current += animated ? 0.04 : 0;
       drawContours(timeRef.current);
-      if (isAnimated) {
-        animFrameRef.current = requestAnimationFrame(animate);
-      }
+      animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    if (isAnimated) {
-      animate();
-    } else {
-      drawContours(0);
-    }
+    animate();
 
     return () => {
       window.removeEventListener("resize", resize);
-      if (isAnimated) {
-        cancelAnimationFrame(animFrameRef.current);
-      }
+      cancelAnimationFrame(animFrameRef.current);
     };
   }, [lineColor, backgroundColor, lineCount, animated]);
 
