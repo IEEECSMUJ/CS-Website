@@ -4,11 +4,11 @@ import styles from "@/components/common/CardStack.module.css";
 import { motion } from "framer-motion";
 
 const images = [
-  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932982587_dsmmlt.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781931822598_b2n7xi.avif",
   "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932593544_yg7km7.avif",
   "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781890098603_s975e.avif",
   "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781931700933_k94jd.avif",
-  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781931822598_b2n7xi.avif",
+  "",
   "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932315150_odb4va.avif",
   "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932135318_m303ra.avif",
 ];
