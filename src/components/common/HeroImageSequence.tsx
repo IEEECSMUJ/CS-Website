@@ -148,13 +148,15 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
   }, [images]);
 
   useGSAP(() => {
-    if (!scrollContainerRef?.current || !sequenceRef.current || !modelRef.current) return;
+    if (!scrollContainerRef?.current || !sequenceRef.current) return;
+
+    const isMobile = windowSize.width < 768;
 
     // Initial setup
-    // Keep 3D model container as display: block at all times to pre-warm the WebGL context,
-    // compile shaders, and render initial frames immediately at 100vw/100vh.
     gsap.set(sequenceRef.current, { opacity: 1, display: "flex" });
-    gsap.set(modelRef.current, { opacity: 0, display: "block" });
+    if (modelRef.current) {
+      gsap.set(modelRef.current, { opacity: 0, display: "block" });
+    }
 
     const playhead = { frame: 0 };
 
@@ -175,20 +177,22 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
       ease: "none",
     }, 0);
 
-    tl.to(sequenceRef.current, {
-      opacity: 0,
-      duration: 0.04,
-      ease: "none",
-    }, 0.94);
+    if (!isMobile && modelRef.current) {
+      tl.to(sequenceRef.current, {
+        opacity: 0,
+        duration: 0.04,
+        ease: "none",
+      }, 0.94);
 
-    tl.set(sequenceRef.current, { display: "none" }, 0.98);
+      tl.set(sequenceRef.current, { display: "none" }, 0.98);
 
-    // Model Opacity/Display (No display toggles to prevent Layout Thrashing or ResizeObserver delays)
-    tl.to(modelRef.current, {
-      opacity: 1,
-      duration: 0.04,
-      ease: "none",
-    }, 0.94);
+      // Model Opacity/Display
+      tl.to(modelRef.current, {
+        opacity: 1,
+        duration: 0.04,
+        ease: "none",
+      }, 0.94);
+    }
 
     // Frame sequence playhead tween
     tl.to(playhead, {
@@ -207,7 +211,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
       renderFrame(0);
     }
 
-  }, { dependencies: [scrollContainerRef, images], scope: sequenceRef });
+  }, { dependencies: [scrollContainerRef, images, windowSize.width], scope: sequenceRef });
 
   useEffect(() => {
     if (images.length === totalFrames && windowSize.width > 0) {
@@ -242,28 +246,30 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
       </div>
 
       {/* 3D Model Canvas */}
-      <div 
-        ref={modelRef}
-        className="absolute inset-0 z-20 pointer-events-none"
-      >
-        <Canvas
-          camera={{ position: [0, 0, 5], fov: 45 }}
-          gl={{ alpha: true, antialias: true }}
-          style={{ background: "transparent", pointerEvents: "none" }}
+      {windowSize.width >= 768 && (
+        <div 
+          ref={modelRef}
+          className="absolute inset-0 z-20 pointer-events-none"
         >
-          <ambientLight intensity={1} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} />
-          <Suspense fallback={null}>
-            <Model 
-              url="/logos/ieee.glb" 
-              scale={windowSize.width < 768 ? 0.22 : 0.35} 
-              position={windowSize.width < 768 ? [0, 0, 0] : [0, 0, 0]} 
-            />
-            <Environment files="/potsdamer_platz_1k.hdr" />
-          </Suspense>
-        </Canvas>
-      </div>
+          <Canvas
+            camera={{ position: [0, 0, 5], fov: 45 }}
+            gl={{ alpha: true, antialias: true }}
+            style={{ background: "transparent", pointerEvents: "none" }}
+          >
+            <ambientLight intensity={1} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
+            <pointLight position={[-10, -10, -10]} intensity={0.5} />
+            <Suspense fallback={null}>
+              <Model 
+                url="/logos/ieee.glb" 
+                scale={0.35} 
+                position={[0, 0, 0]} 
+              />
+              <Environment files="/potsdamer_platz_1k.hdr" />
+            </Suspense>
+          </Canvas>
+        </div>
+      )}
     </div>
   );
 }
