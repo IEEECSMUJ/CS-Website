@@ -230,12 +230,8 @@ export default function Footer() {
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
                   <li style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                     <User style={{ width: '0.95rem', height: '0.95rem', color: '#f97316', flexShrink: 0 }} />
-                    <span style={{ color: '#9ca3af', fontSize: '0.875rem' }}>
-<<<<<<< Updated upstream
-                      Tanmoy Mandal 
-=======
-                      Tanmoy Mandal
->>>>>>> Stashed changes
+                    <span style={{ color: '#9ca3af', fontSize: '0.875rem', lineHeight: '1.6' }}>
+                      Tanmoy Mandal<br />
                       Chairperson
                     </span>
                   </li>
