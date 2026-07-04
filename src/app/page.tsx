@@ -37,7 +37,12 @@ const TOTAL_INTRO = HELLO_LANGUAGES.length * WORD_DURATION + 1000;
 export default function Home() {
   const { isReady } = useLoading();
   const [startIntro, setStartIntro] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(() => {
+    if (typeof window !== "undefined") {
+      return sessionStorage.getItem("preloaderShown") !== "true";
+    }
+    return true;
+  });
   const heroPinRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
