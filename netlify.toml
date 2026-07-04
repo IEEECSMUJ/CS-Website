@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "R2_PUBLIC_DOMAIN,R2_ACCESS_KEY_ID,R2_SECRET_ACCESS_KEY,R2_ACCOUNT_ID,R2_BUCKET_NAME,DATABASE_URL,ADMIN_PASSWORD,ADMIN_PASSWORD1,ADMIN_PASSWORD2,ADMIN_SESSION_TOKEN,REVALIDATION_TOKEN"
+  SECRETS_SCAN_OMIT_PATHS = ".next/server,.next/cache,.netlify"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
