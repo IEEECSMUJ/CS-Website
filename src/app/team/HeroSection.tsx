@@ -199,11 +199,11 @@ export default function HeroSection({ ecMembers }: { ecMembers: TeamMember[] }) 
 
   return (
     <div ref={heroRef} className="relative w-screen overflow-x-hidden text-white bg-black">
-      <div ref={ourStoryWrapper} className="relative min-h-[140vh] z-10 bg-black">
+      <div ref={ourStoryWrapper} className="relative lg:min-h-[140vh] min-h-0 h-auto z-10 bg-black">
 
         {/* EC section */}
         <div
-          className="absolute top-0 left-0 w-full h-full z-0"
+          className="relative lg:absolute lg:top-0 lg:left-0 w-full h-auto lg:h-full z-0"
           style={{ background: '#080808' }}
         >
           <div
@@ -321,7 +321,7 @@ export default function HeroSection({ ecMembers }: { ecMembers: TeamMember[] }) 
         <div className="lg:hidden">
           <div
             ref={mobileHeroRef}
-            className="sticky top-0 z-20 h-screen overflow-hidden pointer-events-none"
+            className="absolute top-0 left-0 w-full h-screen z-20 overflow-hidden pointer-events-none"
           >
             {/* Mobile collage background */}
             <div className="absolute inset-0 pointer-events-auto">

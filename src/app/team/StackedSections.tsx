@@ -15,11 +15,12 @@ import { TeamMember } from '@/data/teamData';
 interface PanelProps { title: string; members: TeamMember[]; bg: string; zIndex: number; panelRef: React.RefObject<HTMLDivElement | null>; gradient?: string; }
 
 function StickyPanel({ title, members, bg, zIndex, panelRef, gradient }: PanelProps) {
-  const isCore = title === "Core Team";
+  const isCore = title === "Core Team" || title === "Core Committee";
 
   return (
     <div
       ref={panelRef}
+      className="sticky-panel-mobile"
       style={{
         position: isCore ? "relative" : "sticky",
         top: 0,
